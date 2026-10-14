@@ -1,0 +1,2 @@
+# SaiThongGroceryApp
+Stock management application
