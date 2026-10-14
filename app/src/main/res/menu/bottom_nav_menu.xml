@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    bottom_nav_menu.xml: กำหนดรายการเมนูสำหรับแถบนำทางด้านล่าง (Bottom Navigation)
+    แต่ละ item ประกอบด้วย ID, ไอคอน และชื่อเมนู
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- เมนูหน้าหลัก -->
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="หน้าหลัก" />
+
+    <!-- เมนูจัดการสินค้า -->
+    <item
+        android:id="@+id/navigation_products"
+        android:icon="@android:drawable/ic_menu_gallery"
+        android:title="สินค้า" />
+
+    <!-- เมนูจัดการสต็อก -->
+    <item
+        android:id="@+id/navigation_stock"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="สต็อก" />
+
+</menu>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    delete_function.xml: เลย์เอาต์ป๊อปอัพยืนยันการลบสินค้าที่ถอดแบบดีไซน์จากภาพตัวอย่างเป๊ะๆ
+    สไตล์มินิมอลโมเดิร์น ขอบโค้งมนสวยงาม สะอาดตา
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="@color/white">
+
+    <!-- หัวข้อหลักตัวใหญ่เด่นชัดตรงกลางตามแบบ -->
+    <TextView
+        android:id="@+id/tv_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
+        android:text="คุณยืนยันที่จะลบ"
+        android:textColor="#2C3E50"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <!-- กล่องข้อความสไตล์การ์ดขอบมนสีเทาอ่อนตรงกลางครอบชื่อสินค้าและหมวดหมู่ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_gray"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="18dp"
+        android:gravity="center"
+        android:layout_marginBottom="24dp">
+
+        <!-- ชื่อสินค้าตัวหนาสีเข้มชัดเจน -->
+        <TextView
+            android:id="@+id/tv_dialog_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="เลย์สแน็ค"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <!-- หมวดหมู่สินค้าตัวเล็กสีเทาด้านล่างตามรูปตัวอย่าง -->
+        <TextView
+            android:id="@+id/tv_dialog_product_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="ขนมขบเคี้ยว"
+            android:textColor="#A0AAB2"
+            android:textSize="14sp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- แถวปุ่มคำสั่งด้านล่างแบ่งสัดส่วนอย่างเท่ากันครึ่งต่อครึ่ง -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- ปุ่มยกเลิก: พื้นหลังสีเทาอ่อนมากๆ ตัวหนังสือสีเข้มขอบมน -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_dialog_cancel"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#F1F3F5"
+            android:text="ยกเลิก"
+            android:textColor="#5A6B7C"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp" />
+
+        <!-- ปุ่มลบสินค้า: สีแดงสดเด่นสะดุดตา ตัวหนังสือสีขาวตามแบบ -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_dialog_confirm"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#E53935"
+            android:text="ลบสินค้า"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp" />
+    </LinearLayout>
+</LinearLayout>

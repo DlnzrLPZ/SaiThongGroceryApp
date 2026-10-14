@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    update_stock.xml: หน้าจอสำหรับเพิ่มหรือลดจำนวนสินค้าในสต็อก
+    ประกอบด้วยตัวเลือกจำนวน และสรุปสต็อกที่จะเปลี่ยนไปหลังอัปเดต
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="20dp">
+
+    <!-- ส่วนหัว (Header) -->
+    <TextView
+        android:id="@+id/tv_update_stock_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="อัปเดตสต็อก"
+        android:textColor="@color/text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/update_stock_header_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#F1F3F5"
+        app:layout_constraintTop_toBottomOf="@id/tv_update_stock_title" />
+
+    <!-- ส่วนที่ 1: การ์ดแสดงข้อมูลสินค้าปัจจุบัน (Product Info Card) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_product_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="#F8F9FA"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#E9ECEF"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/update_stock_header_divider">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_update_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="เลย์สแน็ค"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_update_product_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="หมวด: ขนม"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- แสดงจำนวนคงเหลือปัจจุบัน -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_tag_orange"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp">
+                <TextView
+                    android:id="@+id/tv_current_stock_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8"
+                    android:textColor="@color/brand_orange"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ชิ้น"
+                    android:textColor="@color/brand_orange"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ส่วนที่ 2: ส่วนเลือกจำนวน (Quantity Picker) -->
+    <TextView
+        android:id="@+id/lbl_add_qty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="เพิ่มจำนวน (ชิ้น)"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_product_info" />
+
+    <LinearLayout
+        android:id="@+id/ll_qty_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/lbl_add_qty">
+
+        <!-- ปุ่มลดจำนวน -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_minus"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="ลดจำนวน"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="28dp"
+            app:icon="@android:drawable/ic_input_delete"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
+
+        <!-- ช่องแสดงจำนวนที่จะเพิ่ม/ลด -->
+        <TextView
+            android:id="@+id/tv_add_qty_val"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="20"
+            android:textColor="@color/text_primary"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <!-- ปุ่มเพิ่มจำนวน -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_plus"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:backgroundTint="@color/brand_orange"
+            android:contentDescription="เพิ่มจำนวน"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="28dp"
+            app:icon="@android:drawable/ic_input_add"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
+    </LinearLayout>
+
+    <!-- ส่วนที่ 3: กล่องสรุปสต็อกใหม่ (Summary Box) -->
+    <LinearLayout
+        android:id="@+id/ll_stock_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="#E8F5E9"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_qty_picker">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="สต็อกหลังอัปเดต"
+            android:textColor="@color/brand_green"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_after_stock_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="28 ชิ้น"
+            android:textColor="@color/brand_green"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- ส่วนที่ 4: หมายเหตุ (Remark) -->
+    <TextView
+        android:id="@+id/lbl_remark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="สาเหตุ / หมายเหตุ"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_stock_summary" />
+
+    <EditText
+        android:id="@+id/et_remark"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_rounded_gray"
+        android:hint="เช่น รับของเข้าใหม่"
+        android:paddingHorizontal="16dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/lbl_remark" />
+
+    <!-- ส่วนที่ 5: ปุ่มบันทึก/ยกเลิก (Action Buttons) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/et_remark">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_update_stock_cancel"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="ยกเลิก"
+            android:textColor="@color/text_secondary"
+            app:cornerRadius="16dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm_update_stock"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/brand_orange"
+            android:text="อัปเดตสต็อก"
+            android:textStyle="bold"
+            app:cornerRadius="16dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
