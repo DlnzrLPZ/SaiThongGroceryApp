@@ -7,14 +7,13 @@ import com.pongsakorn.saithonggroceryapp.databinding.StockBinding
 /**
  * Stock: คลาสจัดการตรรกะหน้าจัดการสต็อกสินค้าด้วย RecyclerView ประสิทธิภาพสูง
  */
-class Stock(view: View, private val onUpdateClick: (Product?) -> Unit) {
+class Stock(view: View, private val onUpdateClick: (Product) -> Unit) {
     
     private val binding = StockBinding.bind(view)
     private lateinit var adapter: StockAdapter
 
     init {
         setupRecyclerView()
-        setupListeners()
         updateCounters()
     }
 
@@ -24,12 +23,6 @@ class Stock(view: View, private val onUpdateClick: (Product?) -> Unit) {
         }
         binding.rvStock.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvStock.adapter = adapter
-    }
-
-    private fun setupListeners() {
-        binding.btnAddStock.setOnClickListener {
-            onUpdateClick(null)
-        }
     }
 
     fun updateCounters() {
@@ -42,6 +35,7 @@ class Stock(view: View, private val onUpdateClick: (Product?) -> Unit) {
         binding.tvLowStockVal.text = lowStockCount.toString()
         binding.tvOutOfStockVal.text = outOfStockCount.toString()
 
-        adapter.submitList(products.toList())
+        // ใช้ .map { it.copy() } เพื่อสร้างสำเนาอ็อบเจกต์ใหม่ ทำให้ DiffUtil ตรวจพบการเปลี่ยนแปลงของสต็อกได้อย่างถูกต้อง
+        adapter.submitList(products.map { it.copy() })
     }
 }

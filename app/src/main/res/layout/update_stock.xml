@@ -105,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="เพิ่มจำนวน (ชิ้น)"
+        android:text="เพิ่ม/ลดจำนวน (ชิ้น)"
         android:textColor="@color/text_primary"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,15 +136,19 @@
             app:iconGravity="textStart"
             app:iconPadding="0dp" />
 
-        <!-- ช่องแสดงจำนวนที่จะเพิ่ม/ลด -->
-        <TextView
-            android:id="@+id/tv_add_qty_val"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+        <!-- ช่องกรอก/แสดงจำนวนที่จะเพิ่ม/ลด -->
+        <EditText
+            android:id="@+id/et_add_qty_val"
+            android:layout_width="120dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="12dp"
+            android:background="@drawable/bg_rounded_gray"
             android:gravity="center"
-            android:text="20"
+            android:inputType="numberSigned"
+            android:paddingHorizontal="8dp"
+            android:text="0"
             android:textColor="@color/text_primary"
-            android:textSize="32sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
         <!-- ปุ่มเพิ่มจำนวน -->

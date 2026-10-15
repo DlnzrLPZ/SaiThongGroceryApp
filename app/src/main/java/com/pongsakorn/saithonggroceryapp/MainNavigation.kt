@@ -51,8 +51,16 @@ class MainNavigation : AppCompatActivity() {
         homeScreen = Home(binding.layoutHome.root) {
             binding.bottomNavigation.selectedItemId = R.id.navigation_products
         }
+
+        val updateStockScreen = UpdateStock(binding.layoutUpdateStock.root) {
+            productsScreen.refreshProductList()
+            stockScreen.updateCounters()
+            homeScreen.updateDashboardCounters()
+            showLayout(binding.layoutStock.root)
+        }
         
-        stockScreen = Stock(binding.layoutStock.root) {
+        stockScreen = Stock(binding.layoutStock.root) { product ->
+            updateStockScreen.setProduct(product)
             showLayout(binding.layoutUpdateStock.root)
         }
         
@@ -63,6 +71,10 @@ class MainNavigation : AppCompatActivity() {
             },
             onEditClick = {
                 showLayout(binding.layoutEditProduct.root)
+            },
+            onProductListChanged = {
+                stockScreen.updateCounters()
+                homeScreen.updateDashboardCounters()
             },
         )
 
@@ -78,13 +90,6 @@ class MainNavigation : AppCompatActivity() {
             stockScreen.updateCounters()
             homeScreen.updateDashboardCounters()
             showLayout(binding.layoutProducts.root)
-        }
-
-        UpdateStock(binding.layoutUpdateStock.root) {
-            productsScreen.refreshProductList()
-            stockScreen.updateCounters()
-            homeScreen.updateDashboardCounters()
-            showLayout(binding.layoutStock.root)
         }
     }
 

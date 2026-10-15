@@ -34,12 +34,16 @@ object ProductData {
         products.add(0, Product(nextId, name, category, price, stock))
     }
 
+    fun updateStock(id: String, newStock: Int) {
+        products.find { it.id == id }?.stock = newStock
+    }
+
     fun deleteProduct(product: Product) {
-        products.remove(product)
+        products.removeAll { it.id == product.id }
     }
 
     fun restoreProduct(product: Product, index: Int = 0) {
-        if (!products.contains(product)) {
+        if (products.none { it.id == product.id }) {
             val safeIndex = index.coerceIn(0, products.size)
             products.add(safeIndex, product)
         }

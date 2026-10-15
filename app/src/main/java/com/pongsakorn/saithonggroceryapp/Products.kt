@@ -15,6 +15,7 @@ class Products(
     mainView: View, 
     private val onAddClick: () -> Unit,
     private val onEditClick: () -> Unit,
+    private val onProductListChanged: () -> Unit = {},
 ) {
 
     private val binding = ProductsBinding.bind(mainView)
@@ -29,11 +30,13 @@ class Products(
                 lastDeletedIndex = ProductData.products.indexOf(product)
                 ProductData.deleteProduct(product)
                 ActivityData.logAction("ลบสินค้าออกจากระบบ", product.name, LogType.DELETE)
+                onProductListChanged()
             }
         },
         onUndoClicked = {
             lastDeletedProduct?.let { product ->
                 ProductData.restoreProduct(product, lastDeletedIndex)
+                onProductListChanged()
             }
         },
         onRefreshList = { refreshProductList() },
@@ -101,7 +104,7 @@ class Products(
     }
 
     fun refreshProductList() {
-        adapter.submitList(getFilteredList().toList())
+        adapter.submitList(getFilteredList().map { it.copy() })
     }
 
     private fun updateTags(selectedTag: TextView) {
