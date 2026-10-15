@@ -31,7 +31,7 @@ class Home(view: View, private val onSeeAllClick: () -> Unit) {
 
     fun updateDashboardCounters() {
         val total = ProductData.products.size
-        val lowStock = ProductData.products.count { ((it.stock in 0..10)) }
+        val lowStock = ProductData.products.count { ((it.stock in 1..10)) }
         
         binding.tvHomeTotalVal.text = total.toString()
         binding.tvHomeLowStockVal.text = lowStock.toString()

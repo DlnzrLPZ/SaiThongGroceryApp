@@ -28,12 +28,12 @@ This is a **private app made for the shop owner only**. It has no multi-user log
 
 | Screen | What you can do |
 |---|---|
-| 🏠 **Home** | Dashboard with total products, how many are low or out of stock, and recent activity |
+| 🏠 **Home** | Dashboard with total products, low-stock count, and recent activity |
 | 📦 **Products** | Browse all products, search by name, filter by category |
 | ➕ **Add / ✏️ Edit** | Create or change a product (name, category, price, stock) with input validation |
 | 🗑️ **Delete** | Confirm before deleting, with an **Undo** button right after |
 | 📊 **Stock** | Overview of total, low-stock, and out-of-stock items |
-| 🔄 **Update stock** | Add received items with **+ / −** buttons and preview the new total before confirming |
+| 🔄 **Update stock** | Change the stock of the product you picked with **+ / −** or by typing a number, and preview the new total before confirming |
 | 📝 **Activity log** | Every add, edit, delete and stock change is recorded with a time |
 
 **Stock levels**
