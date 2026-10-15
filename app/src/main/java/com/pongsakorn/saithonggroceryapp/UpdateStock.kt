@@ -63,8 +63,9 @@ class UpdateStock(view: View, private val onBackClick: () -> Unit) {
         binding.btnConfirmUpdateStock.setOnClickListener {
             currentProduct?.let { targetProduct ->
                 val newStock = (currentQty + addQty).coerceAtLeast(0)
+                // อัปเดตที่ข้อมูลจริงตาม id เท่านั้น ห้ามแก้ targetProduct โดยตรง
+                // เพราะเป็นอ็อบเจกต์ที่ list กำลังแสดงอยู่ ทำให้ DiffUtil มองไม่เห็นการเปลี่ยนแปลง
                 ProductData.updateStock(targetProduct.id, newStock)
-                targetProduct.stock = newStock
 
                 ActivityData.logAction("อัปเดตจำนวนสต็อก", "${targetProduct.name} เป็น $newStock ชิ้น", LogType.UPDATE)
             }
