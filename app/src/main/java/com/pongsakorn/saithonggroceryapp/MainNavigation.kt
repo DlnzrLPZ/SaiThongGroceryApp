@@ -1,4 +1,4 @@
-package com.patcharawadee.main_project
+package com.pongsakorn.saithonggroceryapp
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.patcharawadee.main_project.databinding.MainContainerBinding
+import com.pongsakorn.saithonggroceryapp.databinding.MainContainerBinding
 
 /**
  * MainNavigation: คลาสหลักที่ควบคุมการเปลี่ยนหน้า (Navigation) ทั้งหมดในแอปพลิเคชัน

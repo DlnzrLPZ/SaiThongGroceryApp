@@ -1,4 +1,4 @@
-package com.patcharawadee.main_project
+package com.pongsakorn.saithonggroceryapp
 
 /**
  * ActivityLog: ข้อมูลกิจกรรมล่าสุดในร้าน

@@ -1,4 +1,4 @@
-package com.patcharawadee.main_project
+package com.pongsakorn.saithonggroceryapp
 
 /**
  * ProductData: ข้อมูลสินค้าจำลองในหน่วยความจำ (In-Memory Data Store)

@@ -1,4 +1,4 @@
-package com.patcharawadee.main_project
+package com.pongsakorn.saithonggroceryapp
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.patcharawadee.main_project.databinding.ItemStockBinding
+import com.pongsakorn.saithonggroceryapp.databinding.ItemStockBinding
 
 /**
  * StockAdapter: อะแดปเตอร์ประสิทธิภาพสูงใช้ ListAdapter และ DiffUtil สำหรับหน้าจัดการสต็อก

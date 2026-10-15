@@ -10,7 +10,7 @@
         android:label="ร้านทรายทอง"
         android:roundIcon="@drawable/saithong"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Main_project">
+        android:theme="@style/Theme.SaiThongGroceryApp">
         <activity
             android:name=".MainNavigation"
             android:exported="true"

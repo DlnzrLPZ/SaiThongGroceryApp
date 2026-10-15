@@ -1,4 +1,4 @@
-package com.patcharawadee.main_project
+package com.pongsakorn.saithonggroceryapp
 
 /**
  * Data class แทนข้อมูลสินค้า 1 ชิ้นในระบบ

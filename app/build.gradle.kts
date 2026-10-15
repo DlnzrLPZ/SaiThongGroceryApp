@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.patcharawadee.main_project"
+    namespace = "com.pongsakorn.saithonggroceryapp"
     compileSdk {
         version = release(37) {
             minorApiLevel = 1
@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.patcharawadee.main_project"
+        applicationId = "com.pongsakorn.saithonggroceryapp"
         minSdk = 28
         targetSdk = 36
         versionCode = 1
