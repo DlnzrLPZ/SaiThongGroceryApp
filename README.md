@@ -28,12 +28,12 @@ This is a **private app made for the shop owner only**. It has no multi-user log
 
 | Screen | What you can do |
 |---|---|
-| 🏠 **Home** | Dashboard with total products, low-stock count, and recent activity |
+| 🏠 **Home** | Dashboard with total products, how many are low or out of stock, and recent activity |
 | 📦 **Products** | Browse all products, search by name, filter by category |
 | ➕ **Add / ✏️ Edit** | Create or change a product (name, category, price, stock) with input validation |
 | 🗑️ **Delete** | Confirm before deleting, with an **Undo** button right after |
 | 📊 **Stock** | Overview of total, low-stock, and out-of-stock items |
-| 🔄 **Update stock** | Add received items and leave a note (for example, "new delivery") |
+| 🔄 **Update stock** | Add received items with **+ / −** buttons and preview the new total before confirming |
 | 📝 **Activity log** | Every add, edit, delete and stock change is recorded with a time |
 
 **Stock levels**
@@ -74,7 +74,9 @@ app/src/main/
 │   ├── UpdateStock.kt        # Update stock form
 │   ├── Product.kt            # Product model
 │   ├── ProductData.kt        # In-memory product store
+│   ├── ProductResources.kt   # Category icons and colors
 │   ├── ActivityData.kt       # In-memory activity log
+│   ├── ActivityLog.kt        # Activity log model
 │   └── *Adapter.kt           # RecyclerView adapters
 └── res/
     ├── layout/               # Screens and list items
