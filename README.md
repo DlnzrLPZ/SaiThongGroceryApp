@@ -101,7 +101,7 @@ A college group project, made while learning Android development with Kotlin.
 
 | Name | GitHub |
 |---|---|
-| Pongsakorn Watthana ("Shark") | [@DlnzrLPZ](https://github.com/DlnzrLPZ) |
+| Pongsakorn Watthana | [@DlnzrLPZ](https://github.com/DlnzrLPZ) |
 | Patcharawadee Watthanaudomsuk | |
 | Aryuphak Lengthaisong | |
 | Suthakorn Phanphrm | |
