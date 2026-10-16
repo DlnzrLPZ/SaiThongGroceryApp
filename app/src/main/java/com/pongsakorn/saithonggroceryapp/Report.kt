@@ -11,6 +11,7 @@ import com.pongsakorn.saithonggroceryapp.databinding.ReportBinding
  */
 class Report(
     view: View,
+    private val repo: ProductRepository,
     private val onBackClick: () -> Unit,
     private val onUpdateClick: (Product) -> Unit,
 ) {
@@ -37,8 +38,9 @@ class Report(
 
     fun refresh() {
         val context = binding.root.context
-        val lowItems = ProductData.products.filter { it.isLowStock }.sortedBy { it.stock }
-        val outItems = ProductData.products.filter { it.isOutOfStock }
+        val products = repo.getAll()
+        val lowItems = products.filter { it.isLowStock }.sortedBy { it.stock }
+        val outItems = products.filter { it.isOutOfStock }
 
         binding.tabReportLow.text = context.getString(R.string.report_low_stock_tab, lowItems.size)
         binding.tabReportOut.text = context.getString(R.string.report_out_of_stock_tab, outItems.size)

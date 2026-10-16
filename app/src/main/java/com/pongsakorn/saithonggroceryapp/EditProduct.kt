@@ -10,7 +10,11 @@ import com.pongsakorn.saithonggroceryapp.databinding.EditProductBinding
  * คลาส EditProduct: จัดการ Logic ของหน้าแก้ไขข้อมูลสินค้า
  * เรียก setProduct() ก่อนแสดงหน้านี้ เพื่อใส่ข้อมูลเดิมของสินค้าที่ถูกกด
  */
-class EditProduct(view: View, private val onBackClick: () -> Unit) {
+class EditProduct(
+    view: View,
+    private val repo: ProductRepository,
+    private val onBackClick: () -> Unit,
+) {
 
     private val binding = EditProductBinding.bind(view)
 
@@ -64,7 +68,7 @@ class EditProduct(view: View, private val onBackClick: () -> Unit) {
                 return@setOnClickListener
             }
 
-            ProductData.updateProduct(productId, name, selectedCategory, price)
+            repo.update(productId, name, selectedCategory, price)
             ActivityData.logAction(
                 "แก้ไขข้อมูลสินค้า",
                 "$name · $selectedCategory · ฿${price.toPriceText()}",

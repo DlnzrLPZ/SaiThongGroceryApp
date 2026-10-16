@@ -15,6 +15,9 @@ import com.pongsakorn.saithonggroceryapp.databinding.MainContainerBinding
  */
 class MainNavigation : AppCompatActivity() {
 
+    /** เปลี่ยนเป็น RemoteProductRepository ที่นี่ที่เดียว เมื่อ backend พร้อม */
+    private val productRepo: ProductRepository = ProductData
+
     private lateinit var binding: MainContainerBinding
     private lateinit var layouts: List<View>
 
@@ -85,6 +88,7 @@ class MainNavigation : AppCompatActivity() {
 
         homeScreen = Home(
             binding.layoutHome.root,
+            productRepo,
             onSeeAllClick = {
                 binding.bottomNavigation.selectedItemId = R.id.navigation_products
             },
@@ -93,7 +97,7 @@ class MainNavigation : AppCompatActivity() {
             },
         )
 
-        val updateStockScreen = UpdateStock(binding.layoutUpdateStock.root) {
+        val updateStockScreen = UpdateStock(binding.layoutUpdateStock.root, productRepo) {
             refreshAll()
             showLayout(updateStockReturnView ?: binding.layoutStock.root)
         }
@@ -106,6 +110,7 @@ class MainNavigation : AppCompatActivity() {
 
         reportScreen = Report(
             binding.layoutReport.root,
+            productRepo,
             onBackClick = {
                 stockScreen.updateCounters()
                 showLayout(binding.layoutStock.root)
@@ -115,6 +120,7 @@ class MainNavigation : AppCompatActivity() {
 
         stockScreen = Stock(
             binding.layoutStock.root,
+            productRepo,
             onReportClick = {
                 reportScreen.refresh()
                 showLayout(binding.layoutReport.root)
@@ -122,13 +128,14 @@ class MainNavigation : AppCompatActivity() {
             onUpdateClick = { product -> openUpdateStock(product, binding.layoutStock.root) },
         )
 
-        val editProductScreen = EditProduct(binding.layoutEditProduct.root) {
+        val editProductScreen = EditProduct(binding.layoutEditProduct.root, productRepo) {
             refreshAll()
             showLayout(binding.layoutProducts.root)
         }
 
         productsScreen = Products(
             binding.layoutProducts.root,
+            productRepo,
             onAddClick = {
                 showLayout(binding.layoutAddProduct.root)
             },
@@ -139,7 +146,7 @@ class MainNavigation : AppCompatActivity() {
             onProductListChanged = { refreshAll() },
         )
 
-        AddProduct(binding.layoutAddProduct.root) {
+        AddProduct(binding.layoutAddProduct.root, productRepo) {
             refreshAll()
             showLayout(binding.layoutProducts.root)
         }

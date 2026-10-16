@@ -24,11 +24,13 @@ object ActivityData {
         sortByDescending { it.timeMillis }
     }
 
-    fun logAction(title: String, detail: String, type: LogType, remark: String = "") {
+    /** บันทึกกิจกรรม แล้วคืน id ของ log (ใช้ลบทีหลังได้ เช่นตอน Undo) */
+    fun logAction(title: String, detail: String, type: LogType, remark: String = ""): String {
+        val id = "${System.currentTimeMillis()}-${nextId++}"
         logs.add(
             0,
             ActivityLog(
-                id = "${System.currentTimeMillis()}-${nextId++}",
+                id = id,
                 title = title,
                 detail = detail,
                 timeMillis = System.currentTimeMillis(),
@@ -37,6 +39,21 @@ object ActivityData {
             ),
         )
         purgeExpired()
+        return id
+    }
+
+    fun removeLog(id: String) {
+        logs.removeAll { it.id == id }
+    }
+
+    /** แจ้งเตือนเฉพาะตอนสต็อกเพิ่งลดลงมาถึงเกณฑ์ใกล้หมด / หมด (ไม่แจ้งซ้ำถ้าอยู่ในเกณฑ์อยู่แล้ว) */
+    fun logStockAlert(name: String, oldStock: Int, newStock: Int) {
+        when {
+            newStock == 0 && oldStock > 0 ->
+                logAction("สินค้าหมดสต็อก", "$name คงเหลือ 0 ชิ้น", LogType.ALERT)
+            newStock in 1..Product.LOW_STOCK_THRESHOLD && oldStock > Product.LOW_STOCK_THRESHOLD ->
+                logAction("สินค้าใกล้หมด", "$name คงเหลือ $newStock ชิ้น", LogType.ALERT)
+        }
     }
 
     /** ลบ log ที่เก่ากว่า 3 เดือนออกจากรายการ */

@@ -10,7 +10,11 @@ import com.pongsakorn.saithonggroceryapp.databinding.UpdateStockBinding
 /**
  * คลาส UpdateStock: จัดการ Logic ของหน้าการเพิ่ม/ลดจำนวนสินค้าในสต็อก
  */
-class UpdateStock(view: View, private val onBackClick: () -> Unit) {
+class UpdateStock(
+    view: View,
+    private val repo: ProductRepository,
+    private val onBackClick: () -> Unit,
+) {
 
     private val binding = UpdateStockBinding.bind(view)
     
@@ -25,7 +29,7 @@ class UpdateStock(view: View, private val onBackClick: () -> Unit) {
     }
 
     fun setProduct(product: Product?) {
-        currentProduct = product ?: ProductData.products.firstOrNull()
+        currentProduct = product ?: repo.getAll().firstOrNull()
         addQty = 0
         binding.etRemark.text?.clear()
         updateDisplay()
@@ -67,6 +71,12 @@ class UpdateStock(view: View, private val onBackClick: () -> Unit) {
             val targetProduct = currentProduct ?: return@setOnClickListener
             val newStock = (currentQty + addQty).coerceAtLeast(0)
 
+            // ไม่มีการเปลี่ยนจำนวน: ไม่ต้องบันทึก/ไม่ต้องสร้าง log
+            if (newStock == currentQty) {
+                Toast.makeText(binding.root.context, "ยังไม่ได้เปลี่ยนจำนวนสต็อก", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             // ถ้าจะทำให้สต็อกเหลือ 0 ให้ถามยืนยันก่อน
             if (newStock == 0) {
                 showZeroStockConfirm(targetProduct) { saveStock(targetProduct, newStock) }
@@ -91,13 +101,14 @@ class UpdateStock(view: View, private val onBackClick: () -> Unit) {
 
         // อัปเดตที่ข้อมูลจริงตาม id เท่านั้น ห้ามแก้ product โดยตรง
         // เพราะเป็นอ็อบเจกต์ที่ list กำลังแสดงอยู่ ทำให้ DiffUtil มองไม่เห็นการเปลี่ยนแปลง
-        ProductData.updateStock(product.id, newStock)
+        repo.updateStock(product.id, newStock)
         ActivityData.logAction(
             title = "อัปเดตจำนวนสต็อก",
             detail = "${product.name} เป็น $newStock ชิ้น",
             type = LogType.UPDATE,
             remark = remark,
         )
+        ActivityData.logStockAlert(product.name, currentQty, newStock)
 
         Toast.makeText(binding.root.context, "อัปเดตสต็อกเรียบร้อยแล้ว", Toast.LENGTH_SHORT).show()
         binding.etRemark.text?.clear()
@@ -118,7 +129,7 @@ class UpdateStock(view: View, private val onBackClick: () -> Unit) {
     }
 
     private fun updateDisplay() {
-        (currentProduct ?: ProductData.products.firstOrNull())?.let { targetProduct ->
+        (currentProduct ?: repo.getAll().firstOrNull())?.let { targetProduct ->
             currentProduct = targetProduct
             currentQty = targetProduct.stock
             binding.tvUpdateProductName.text = targetProduct.name

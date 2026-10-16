@@ -9,6 +9,7 @@ import com.pongsakorn.saithonggroceryapp.databinding.StockBinding
  */
 class Stock(
     view: View,
+    private val repo: ProductRepository,
     private val onReportClick: () -> Unit = {},
     private val onUpdateClick: (Product) -> Unit,
 ) {
@@ -31,7 +32,7 @@ class Stock(
     }
 
     fun updateCounters() {
-        val products = ProductData.products
+        val products = repo.getAll()
         val totalCount = products.size
         val lowStockCount = products.count { it.isLowStock }
         val outOfStockCount = products.count { it.isOutOfStock }

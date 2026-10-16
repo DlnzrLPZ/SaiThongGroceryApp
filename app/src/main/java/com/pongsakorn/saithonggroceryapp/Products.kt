@@ -12,7 +12,8 @@ import com.pongsakorn.saithonggroceryapp.databinding.ProductsBinding
  * คลาส Products: จัดการตรรกะ (Logic) ของหน้าแสดงรายการสินค้าด้วย RecyclerView ประสิทธิภาพสูง
  */
 class Products(
-    mainView: View, 
+    mainView: View,
+    private val repo: ProductRepository,
     private val onAddClick: () -> Unit,
     private val onEditClick: (Product) -> Unit,
     private val onProductListChanged: () -> Unit = {},
@@ -22,6 +23,7 @@ class Products(
     private lateinit var adapter: ProductAdapter
     private var lastDeletedProduct: Product? = null
     private var lastDeletedIndex: Int = 0
+    private var lastDeleteLogId: String? = null
 
     // หมวดหมู่ที่เลือกอยู่ (เก็บเป็นตัวแปรตรง ๆ แทนการเดาจากตัวอักษรหนาของแท็บ)
     private val categoryAll = mainView.context.getString(R.string.category_all)
@@ -31,15 +33,17 @@ class Products(
         mainView = mainView,
         onDeleteConfirmed = {
             lastDeletedProduct?.let { product ->
-                lastDeletedIndex = ProductData.products.indexOf(product)
-                ProductData.deleteProduct(product)
-                ActivityData.logAction("ลบสินค้าออกจากระบบ", product.name, LogType.DELETE)
+                lastDeletedIndex = repo.indexOf(product.id)
+                repo.delete(product)
+                lastDeleteLogId = ActivityData.logAction("ลบสินค้าออกจากระบบ", product.name, LogType.DELETE)
                 onProductListChanged()
             }
         },
         onUndoClicked = {
             lastDeletedProduct?.let { product ->
-                ProductData.restoreProduct(product, lastDeletedIndex)
+                repo.restore(product, lastDeletedIndex)
+                lastDeleteLogId?.let { ActivityData.removeLog(it) }
+                lastDeleteLogId = null
                 onProductListChanged()
             }
         },
@@ -99,7 +103,7 @@ class Products(
     private fun getFilteredList(): List<Product> {
         val query = binding.etSearch.text.toString().trim()
 
-        return ProductData.products.filter { product ->
+        return repo.getAll().filter { product ->
             val matchesSearch = product.name.contains(query, ignoreCase = true)
             val matchesCategory = (selectedCategory == categoryAll) || (product.category == selectedCategory)
             matchesSearch && matchesCategory
