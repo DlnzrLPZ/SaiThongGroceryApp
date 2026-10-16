@@ -60,6 +60,25 @@
     <string name="delete_dialog_confirm_msg">คุณยืนยันที่จะลบ</string>
     <string name="delete_success_msg">ลบ \"%1$s\" เรียบร้อยแล้ว</string>
 
+    <!-- Zero stock confirm -->
+    <string name="confirm_zero_stock_title">ยืนยันตั้งสต็อกเป็น 0</string>
+    <string name="confirm_zero_stock_msg">การอัปเดตนี้จะทำให้ \"%1$s\" หมดสต็อก (0 ชิ้น) ต้องการดำเนินการต่อหรือไม่?</string>
+
+    <!-- History -->
+    <string name="history_title">ประวัติกิจกรรม</string>
+    <string name="history_subtitle">เก็บประวัติย้อนหลัง 3 เดือน หลังจากนั้นจะถูกลบอัตโนมัติ</string>
+    <string name="history_empty">ยังไม่มีประวัติกิจกรรม</string>
+    <string name="remark_format">หมายเหตุ: %1$s</string>
+
+    <!-- Report -->
+    <string name="report_title">รายงานสต็อก</string>
+    <string name="report_button">รายงาน</string>
+    <string name="report_low_stock_tab">ใกล้หมด (%1$d)</string>
+    <string name="report_out_of_stock_tab">หมดสต็อก (%1$d)</string>
+    <string name="report_empty_low">ไม่มีสินค้าใกล้หมด</string>
+    <string name="report_empty_out">ไม่มีสินค้าหมดสต็อก</string>
+    <string name="back_arrow">←</string>
+
     <!-- Validation Error Messages -->
     <string name="error_fill_all_fields">กรุณากรอกข้อมูลให้ครบถ้วน</string>
     <string name="error_invalid_price">กรุณากรอกราคาให้ถูกต้อง (มากกว่า 0)</string>

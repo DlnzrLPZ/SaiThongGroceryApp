@@ -7,7 +7,11 @@ import com.pongsakorn.saithonggroceryapp.databinding.HomeBinding
 /**
  * คลาส Home: จัดการ Logic ของหน้าจอหลัก (Dashboard) พร้อม RecyclerView กิจกรรมล่าสุด
  */
-class Home(view: View, private val onSeeAllClick: () -> Unit) {
+class Home(
+    view: View,
+    private val onSeeAllClick: () -> Unit,
+    private val onSeeHistoryClick: () -> Unit = {},
+) {
     
     private val binding = HomeBinding.bind(view)
     private val activityAdapter = ActivityAdapter()
@@ -27,6 +31,9 @@ class Home(view: View, private val onSeeAllClick: () -> Unit) {
         binding.btnSeeAllCategories.setOnClickListener {
             onSeeAllClick()
         }
+        binding.btnSeeAllHistory.setOnClickListener {
+            onSeeHistoryClick()
+        }
     }
 
     fun updateDashboardCounters() {
@@ -36,6 +43,6 @@ class Home(view: View, private val onSeeAllClick: () -> Unit) {
         binding.tvHomeTotalVal.text = total.toString()
         binding.tvHomeLowStockVal.text = lowStock.toString()
 
-        activityAdapter.submitList(ActivityData.logs.toList())
+        activityAdapter.submitList(ActivityData.recentLogs(5))
     }
 }

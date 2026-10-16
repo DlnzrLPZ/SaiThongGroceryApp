@@ -14,7 +14,7 @@ import com.pongsakorn.saithonggroceryapp.databinding.ProductsBinding
 class Products(
     mainView: View, 
     private val onAddClick: () -> Unit,
-    private val onEditClick: () -> Unit,
+    private val onEditClick: (Product) -> Unit,
     private val onProductListChanged: () -> Unit = {},
 ) {
 
@@ -60,7 +60,7 @@ class Products(
 
     private fun setupRecyclerView() {
         adapter = ProductAdapter(
-            onEditClick = { onEditClick() },
+            onEditClick = { product -> onEditClick(product) },
             onDeleteClick = { product, _ ->
                 lastDeletedProduct = product
                 deletionModule.showModernDeleteDialog(

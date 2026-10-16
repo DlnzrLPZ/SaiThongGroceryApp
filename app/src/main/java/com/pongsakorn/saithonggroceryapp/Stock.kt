@@ -7,12 +7,17 @@ import com.pongsakorn.saithonggroceryapp.databinding.StockBinding
 /**
  * Stock: คลาสจัดการตรรกะหน้าจัดการสต็อกสินค้าด้วย RecyclerView ประสิทธิภาพสูง
  */
-class Stock(view: View, private val onUpdateClick: (Product) -> Unit) {
-    
+class Stock(
+    view: View,
+    private val onReportClick: () -> Unit = {},
+    private val onUpdateClick: (Product) -> Unit,
+) {
+
     private val binding = StockBinding.bind(view)
     private lateinit var adapter: StockAdapter
 
     init {
+        binding.btnOpenReport.setOnClickListener { onReportClick() }
         setupRecyclerView()
         updateCounters()
     }

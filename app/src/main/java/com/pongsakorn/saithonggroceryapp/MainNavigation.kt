@@ -20,6 +20,11 @@ class MainNavigation : AppCompatActivity() {
     private lateinit var homeScreen: Home
     private lateinit var stockScreen: Stock
     private lateinit var productsScreen: Products
+    private lateinit var historyScreen: History
+    private lateinit var reportScreen: Report
+
+    /** หน้าที่ต้องกลับไปหลังอัปเดตสต็อกเสร็จ (หน้าสต็อก หรือหน้ารายงาน) */
+    private var updateStockReturnView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +46,8 @@ class MainNavigation : AppCompatActivity() {
             binding.layoutAddProduct.root,
             binding.layoutEditProduct.root,
             binding.layoutUpdateStock.root,
+            binding.layoutHistory.root,
+            binding.layoutReport.root,
         )
 
         setupScreens()
@@ -48,49 +55,81 @@ class MainNavigation : AppCompatActivity() {
     }
 
     private fun setupScreens() {
-        homeScreen = Home(binding.layoutHome.root) {
-            binding.bottomNavigation.selectedItemId = R.id.navigation_products
+        historyScreen = History(binding.layoutHistory.root) {
+            homeScreen.updateDashboardCounters()
+            showLayout(binding.layoutHome.root)
         }
 
-        val updateStockScreen = UpdateStock(binding.layoutUpdateStock.root) {
-            productsScreen.refreshProductList()
-            stockScreen.updateCounters()
-            homeScreen.updateDashboardCounters()
-            showLayout(binding.layoutStock.root)
-        }
-        
-        stockScreen = Stock(binding.layoutStock.root) { product ->
-            updateStockScreen.setProduct(product)
-            showLayout(binding.layoutUpdateStock.root)
-        }
-        
-        productsScreen = Products(
-            binding.layoutProducts.root, 
-            onAddClick = {
-                showLayout(binding.layoutAddProduct.root)
+        homeScreen = Home(
+            binding.layoutHome.root,
+            onSeeAllClick = {
+                binding.bottomNavigation.selectedItemId = R.id.navigation_products
             },
-            onEditClick = {
-                showLayout(binding.layoutEditProduct.root)
-            },
-            onProductListChanged = {
-                stockScreen.updateCounters()
-                homeScreen.updateDashboardCounters()
+            onSeeHistoryClick = {
+                historyScreen.refresh()
+                showLayout(binding.layoutHistory.root)
             },
         )
 
-        AddProduct(binding.layoutAddProduct.root) {
-            productsScreen.refreshProductList()
-            stockScreen.updateCounters()
-            homeScreen.updateDashboardCounters()
+        val updateStockScreen = UpdateStock(binding.layoutUpdateStock.root) {
+            refreshAll()
+            showLayout(updateStockReturnView ?: binding.layoutStock.root)
+        }
+
+        val openUpdateStock = { product: Product, returnTo: View ->
+            updateStockReturnView = returnTo
+            updateStockScreen.setProduct(product)
+            showLayout(binding.layoutUpdateStock.root)
+        }
+
+        reportScreen = Report(
+            binding.layoutReport.root,
+            onBackClick = {
+                stockScreen.updateCounters()
+                showLayout(binding.layoutStock.root)
+            },
+            onUpdateClick = { product -> openUpdateStock(product, binding.layoutReport.root) },
+        )
+
+        stockScreen = Stock(
+            binding.layoutStock.root,
+            onReportClick = {
+                reportScreen.refresh()
+                showLayout(binding.layoutReport.root)
+            },
+            onUpdateClick = { product -> openUpdateStock(product, binding.layoutStock.root) },
+        )
+
+        val editProductScreen = EditProduct(binding.layoutEditProduct.root) {
+            refreshAll()
             showLayout(binding.layoutProducts.root)
         }
 
-        EditProduct(binding.layoutEditProduct.root) {
-            productsScreen.refreshProductList()
-            stockScreen.updateCounters()
-            homeScreen.updateDashboardCounters()
+        productsScreen = Products(
+            binding.layoutProducts.root,
+            onAddClick = {
+                showLayout(binding.layoutAddProduct.root)
+            },
+            onEditClick = { product ->
+                editProductScreen.setProduct(product)
+                showLayout(binding.layoutEditProduct.root)
+            },
+            onProductListChanged = { refreshAll() },
+        )
+
+        AddProduct(binding.layoutAddProduct.root) {
+            refreshAll()
             showLayout(binding.layoutProducts.root)
         }
+    }
+
+    /** รีเฟรชทุกหน้าที่แสดงข้อมูลสินค้า/กิจกรรม ให้ตรงกับข้อมูลล่าสุด */
+    private fun refreshAll() {
+        productsScreen.refreshProductList()
+        stockScreen.updateCounters()
+        reportScreen.refresh()
+        homeScreen.updateDashboardCounters()
+        historyScreen.refresh()
     }
 
     private fun setupBottomNavigation() {
@@ -98,6 +137,7 @@ class MainNavigation : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_home -> {
                     homeScreen.updateDashboardCounters()
+                    historyScreen.refresh()
                     showLayout(binding.layoutHome.root)
                     true
                 }
