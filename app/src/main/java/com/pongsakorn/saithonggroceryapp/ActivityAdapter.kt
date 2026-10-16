@@ -38,16 +38,10 @@ class ActivityAdapter : ListAdapter<ActivityLog, ActivityAdapter.ActivityViewHol
                 tvLogRemark.text = context.getString(R.string.remark_format, log.remark)
             }
 
-            val (bgRes, tintRes, iconRes) = when (log.type) {
-                LogType.ADD -> Triple(R.color.light_green, R.color.brand_green, android.R.drawable.ic_input_add)
-                LogType.UPDATE -> Triple(R.color.light_blue, R.color.brand_blue, android.R.drawable.ic_menu_edit)
-                LogType.DELETE -> Triple(R.color.light_red, R.color.brand_red, android.R.drawable.ic_menu_delete)
-                LogType.ALERT -> Triple(R.color.light_orange, R.color.brand_orange, android.R.drawable.ic_dialog_alert)
-            }
-
-            ivLogIcon.setImageResource(iconRes)
-            ivLogIcon.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, bgRes))
-            ivLogIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, tintRes))
+            val style = log.type.style()
+            ivLogIcon.setImageResource(style.iconRes)
+            ivLogIcon.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, style.bgRes))
+            ivLogIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, style.tintRes))
         }
     }
 

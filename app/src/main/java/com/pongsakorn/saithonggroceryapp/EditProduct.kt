@@ -33,7 +33,7 @@ class EditProduct(view: View, private val onBackClick: () -> Unit) {
     fun setProduct(product: Product) {
         currentProductId = product.id
         binding.etEditProductName.setText(product.name)
-        binding.etEditPrice.setText(formatPrice(product.price))
+        binding.etEditPrice.setText(product.price.toPriceText())
 
         val tag = tags.find { it.text.toString() == product.category } ?: tags.first()
         updateTags(tag)
@@ -67,7 +67,7 @@ class EditProduct(view: View, private val onBackClick: () -> Unit) {
             ProductData.updateProduct(productId, name, selectedCategory, price)
             ActivityData.logAction(
                 "แก้ไขข้อมูลสินค้า",
-                "$name · $selectedCategory · ฿${formatPrice(price)}",
+                "$name · $selectedCategory · ฿${price.toPriceText()}",
                 LogType.UPDATE,
             )
 
@@ -86,8 +86,4 @@ class EditProduct(view: View, private val onBackClick: () -> Unit) {
             tag.setTypeface(null, if (isSelected) Typeface.BOLD else Typeface.NORMAL)
         }
     }
-
-    /** 25.0 -> "25", 25.5 -> "25.5" */
-    private fun formatPrice(price: Double): String =
-        if (price % 1.0 == 0.0) price.toInt().toString() else price.toString()
 }

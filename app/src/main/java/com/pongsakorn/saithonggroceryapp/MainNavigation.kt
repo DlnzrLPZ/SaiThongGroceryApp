@@ -2,6 +2,7 @@ package com.pongsakorn.saithonggroceryapp
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,6 +26,9 @@ class MainNavigation : AppCompatActivity() {
 
     /** หน้าที่ต้องกลับไปหลังอัปเดตสต็อกเสร็จ (หน้าสต็อก หรือหน้ารายงาน) */
     private var updateStockReturnView: View? = null
+
+    /** หน้าที่แสดงอยู่ตอนนี้ (ใช้กับปุ่มย้อนกลับ) */
+    private var currentView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,15 +54,34 @@ class MainNavigation : AppCompatActivity() {
             binding.layoutReport.root,
         )
 
+        currentView = binding.layoutHome.root
+
         setupScreens()
         setupBottomNavigation()
+        setupBackNavigation()
+    }
+
+    /**
+     * ปุ่มย้อนกลับของ Android: ออกจากหน้าย่อย (เพิ่ม/แก้ไข/อัปเดตสต็อก/รายงาน) กลับไปหน้าก่อนหน้า
+     * จากแท็บอื่นกลับหน้าหลัก และจากหน้าหลักค่อยออกจากแอป
+     */
+    private fun setupBackNavigation() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                when (currentView) {
+                    binding.layoutAddProduct.root,
+                    binding.layoutEditProduct.root -> showLayout(binding.layoutProducts.root)
+                    binding.layoutUpdateStock.root -> showLayout(updateStockReturnView ?: binding.layoutStock.root)
+                    binding.layoutReport.root -> showLayout(binding.layoutStock.root)
+                    binding.layoutHome.root -> finish()
+                    else -> binding.bottomNavigation.selectedItemId = R.id.navigation_home
+                }
+            }
+        })
     }
 
     private fun setupScreens() {
-        historyScreen = History(binding.layoutHistory.root) {
-            homeScreen.updateDashboardCounters()
-            showLayout(binding.layoutHome.root)
-        }
+        historyScreen = History(binding.layoutHistory.root)
 
         homeScreen = Home(
             binding.layoutHome.root,
@@ -66,8 +89,7 @@ class MainNavigation : AppCompatActivity() {
                 binding.bottomNavigation.selectedItemId = R.id.navigation_products
             },
             onSeeHistoryClick = {
-                historyScreen.refresh()
-                showLayout(binding.layoutHistory.root)
+                binding.bottomNavigation.selectedItemId = R.id.navigation_history
             },
         )
 
@@ -137,7 +159,6 @@ class MainNavigation : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_home -> {
                     homeScreen.updateDashboardCounters()
-                    historyScreen.refresh()
                     showLayout(binding.layoutHome.root)
                     true
                 }
@@ -151,13 +172,19 @@ class MainNavigation : AppCompatActivity() {
                     showLayout(binding.layoutStock.root)
                     true
                 }
+                R.id.navigation_history -> {
+                    historyScreen.refresh()
+                    showLayout(binding.layoutHistory.root)
+                    true
+                }
                 else -> false
             }
         }
     }
 
     private fun showLayout(targetLayout: View) {
-        layouts.forEach { 
+        currentView = targetLayout
+        layouts.forEach {
             it.visibility = if (it == targetLayout) View.VISIBLE else View.GONE 
         }
     }

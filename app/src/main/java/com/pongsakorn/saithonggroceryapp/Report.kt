@@ -37,8 +37,8 @@ class Report(
 
     fun refresh() {
         val context = binding.root.context
-        val lowItems = ProductData.products.filter { it.stock in 1..10 }.sortedBy { it.stock }
-        val outItems = ProductData.products.filter { it.stock == 0 }
+        val lowItems = ProductData.products.filter { it.isLowStock }.sortedBy { it.stock }
+        val outItems = ProductData.products.filter { it.isOutOfStock }
 
         binding.tabReportLow.text = context.getString(R.string.report_low_stock_tab, lowItems.size)
         binding.tabReportOut.text = context.getString(R.string.report_out_of_stock_tab, outItems.size)

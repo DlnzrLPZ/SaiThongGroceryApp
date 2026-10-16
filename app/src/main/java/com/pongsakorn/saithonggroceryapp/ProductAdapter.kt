@@ -32,7 +32,7 @@ class ProductAdapter(
         with(holder.binding) {
             tvProductName.text = product.name
             tvProductCategory.text = product.category
-            tvProductPrice.text = context.getString(R.string.price_format, product.price.toInt())
+            tvProductPrice.text = context.getString(R.string.price_format, product.price.toPriceText())
 
             val iconRes = ProductResources.getIconByCategory(product.category)
             val bgRes = ProductResources.getBackgroundColorByCategory(product.category)
