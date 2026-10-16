@@ -51,7 +51,7 @@ class AddProduct(
                 return@setOnClickListener
             }
 
-            val price = priceStr.toDoubleOrNull()
+            val price = priceStr.replace(',', '.').toDoubleOrNull()
             if ((price == null) || (price <= 0)) {
                 Toast.makeText(binding.root.context, R.string.error_invalid_price, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

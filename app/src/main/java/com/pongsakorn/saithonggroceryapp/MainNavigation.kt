@@ -189,7 +189,15 @@ class MainNavigation : AppCompatActivity() {
         }
     }
 
+    private fun hideKeyboard() {
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as? android.view.inputmethod.InputMethodManager
+        currentFocus?.let { view ->
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
     private fun showLayout(targetLayout: View) {
+        hideKeyboard()
         currentView = targetLayout
         layouts.forEach {
             it.visibility = if (it == targetLayout) View.VISIBLE else View.GONE 

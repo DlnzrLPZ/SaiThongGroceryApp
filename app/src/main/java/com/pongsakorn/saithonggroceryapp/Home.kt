@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pongsakorn.saithonggroceryapp.databinding.HomeBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 /**
@@ -62,7 +61,9 @@ class Home(
                 else -> R.string.greeting_evening
             },
         )
-        binding.tvHomeDate.text =
-            SimpleDateFormat("EEEEที่ d MMM yyyy", Locale("th", "TH")).format(Date())
+        val cal = Calendar.getInstance()
+        val yearBE = cal.get(Calendar.YEAR) + 543
+        val dayMonth = SimpleDateFormat("EEEEที่ d MMM", Locale.forLanguageTag("th-TH")).format(cal.time)
+        binding.tvHomeDate.text = "$dayMonth - $yearBE"
     }
 }

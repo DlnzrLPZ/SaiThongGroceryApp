@@ -89,7 +89,7 @@
                 android:background="@drawable/bg_tag_orange"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
-                android:text="ขนม"
+                android:text="@string/category_snack"
                 android:textColor="@color/text_primary"
                 android:textStyle="bold" />
 
@@ -101,7 +101,7 @@
                 android:background="@drawable/bg_rounded_gray"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
-                android:text="เครื่องดื่ม"
+                android:text="@string/category_drink"
                 android:textColor="@color/text_secondary" />
 
             <!-- ตัวเลือกหมวดหมู่อื่นๆ... -->
@@ -113,7 +113,7 @@
                 android:background="@drawable/bg_rounded_gray"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
-                android:text="มาม่า"
+                android:text="@string/category_mama"
                 android:textColor="@color/text_secondary" />
 
             <TextView
@@ -124,7 +124,7 @@
                 android:background="@drawable/bg_rounded_gray"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
-                android:text="นม"
+                android:text="@string/category_milk"
                 android:textColor="@color/text_secondary" />
 
             <TextView
@@ -135,7 +135,7 @@
                 android:background="@drawable/bg_rounded_gray"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
-                android:text="แช่แข็ง"
+                android:text="@string/category_frozen"
                 android:textColor="@color/text_secondary" />
         </LinearLayout>
     </HorizontalScrollView>
