@@ -10,7 +10,7 @@ import com.pongsakorn.saithonggroceryapp.databinding.StockBinding
 class Stock(
     view: View,
     private val repo: ProductRepository,
-    private val onReportClick: () -> Unit = {},
+    private val onReportClick: (showOutTab: Boolean) -> Unit = {},
     private val onUpdateClick: (Product) -> Unit,
 ) {
 
@@ -18,7 +18,9 @@ class Stock(
     private lateinit var adapter: StockAdapter
 
     init {
-        binding.btnOpenReport.setOnClickListener { onReportClick() }
+        binding.btnOpenReport.setOnClickListener { onReportClick(false) }
+        binding.cardSummaryLow.setOnClickListener { onReportClick(false) }
+        binding.cardSummaryOut.setOnClickListener { onReportClick(true) }
         setupRecyclerView()
         updateCounters()
     }
@@ -40,6 +42,8 @@ class Stock(
         binding.tvTotalVal.text = totalCount.toString()
         binding.tvLowStockVal.text = lowStockCount.toString()
         binding.tvOutOfStockVal.text = outOfStockCount.toString()
+
+        binding.tvStockEmpty.visibility = if (products.isEmpty()) View.VISIBLE else View.GONE
 
         // ใช้ .map { it.copy() } เพื่อสร้างสำเนาอ็อบเจกต์ใหม่ ทำให้ DiffUtil ตรวจพบการเปลี่ยนแปลงของสต็อกได้อย่างถูกต้อง
         adapter.submitList(products.map { it.copy() })

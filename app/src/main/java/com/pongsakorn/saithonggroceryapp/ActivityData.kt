@@ -15,6 +15,7 @@ object ActivityData {
     private const val MINUTE = 60_000L
 
     private var nextId = 0L
+    private val localeTH = Locale.forLanguageTag("th-TH")
 
     val logs = mutableListOf<ActivityLog>().apply {
         val now = System.currentTimeMillis()
@@ -73,7 +74,7 @@ object ActivityData {
 
     /** เวลาในวันนั้น เช่น 14:05 น. (ใช้ในหน้าประวัติที่จัดกลุ่มตามวันอยู่แล้ว) */
     fun formatClock(timeMillis: Long): String =
-        SimpleDateFormat("HH:mm น.", Locale("th", "TH")).format(Date(timeMillis))
+        SimpleDateFormat("HH:mm น.", localeTH).format(Date(timeMillis))
 
     /** หัวข้อกลุ่มวัน: วันนี้ / เมื่อวาน / วันที่เต็ม */
     fun dayKey(timeMillis: Long): String =
@@ -85,7 +86,7 @@ object ActivityData {
         return when (dayKey(timeMillis)) {
             dayKey(now) -> todayLabel
             dayKey(yesterday) -> yesterdayLabel
-            else -> SimpleDateFormat("d MMM yyyy", Locale("th", "TH")).format(Date(timeMillis))
+            else -> SimpleDateFormat("d MMM yyyy", localeTH).format(Date(timeMillis))
         }
     }
 
@@ -97,6 +98,6 @@ object ActivityData {
         val sameDay = today.get(Calendar.YEAR) == then.get(Calendar.YEAR) &&
             today.get(Calendar.DAY_OF_YEAR) == then.get(Calendar.DAY_OF_YEAR)
         val pattern = if (sameDay) "HH:mm น." else "d MMM yyyy HH:mm น."
-        return SimpleDateFormat(pattern, Locale("th", "TH")).format(date)
+        return SimpleDateFormat(pattern, localeTH).format(date)
     }
 }

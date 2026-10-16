@@ -65,23 +65,23 @@
 
             <ImageView
                 android:id="@+id/btn_delete"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_marginStart="14dp"
                 android:background="@color/light_red"
                 android:contentDescription="@string/btn_delete"
-                android:padding="10dp"
+                android:padding="11dp"
                 android:src="@android:drawable/ic_menu_delete"
                 app:tint="@color/brand_red" />
 
             <ImageView
                 android:id="@+id/btn_edit"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_marginStart="10dp"
                 android:background="@color/light_blue"
                 android:contentDescription="@string/btn_edit"
-                android:padding="10dp"
+                android:padding="11dp"
                 android:src="@android:drawable/ic_menu_edit"
                 app:tint="@color/brand_blue" />
         </LinearLayout>
@@ -91,5 +91,6 @@
         android:id="@+id/item_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginStart="84dp"
         android:background="#F1F3F5" />
 </LinearLayout>

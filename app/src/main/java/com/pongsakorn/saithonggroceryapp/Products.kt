@@ -111,7 +111,9 @@ class Products(
     }
 
     fun refreshProductList() {
-        adapter.submitList(getFilteredList().map { it.copy() })
+        val items = getFilteredList()
+        adapter.submitList(items.map { it.copy() })
+        binding.tvProductsEmpty.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun updateTags(selectedTag: TextView) {

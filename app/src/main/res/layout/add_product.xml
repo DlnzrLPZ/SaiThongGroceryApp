@@ -3,210 +3,218 @@
     add_product.xml: หน้าจอแบบฟอร์มสำหรับเพิ่มสินค้าใหม่
     ประกอบด้วยช่องกรอกชื่อสินค้า, หมวดหมู่, ราคา และสต็อกเริ่มต้น
 -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="20dp">
+    android:fillViewport="true"
+    android:scrollbars="none">
 
-    <!-- ส่วนหัว (Header) -->
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="เพิ่มสินค้าใหม่"
-        android:textColor="@color/text_primary"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/header_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="#F1F3F5"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
-
-    <!-- ช่องกรอก: ชื่อสินค้า -->
-    <TextView
-        android:id="@+id/lbl_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="ชื่อสินค้า"
-        android:textColor="@color/text_primary"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_divider" />
-
-    <EditText
-        android:id="@+id/et_product_name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/bg_rounded_gray"
-        android:hint="เช่น ข้าวสาร, น้ำดื่ม..."
-        android:paddingHorizontal="16dp"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/lbl_name" />
-
-    <!-- ช่องเลือก: หมวดหมู่สินค้า -->
-    <TextView
-        android:id="@+id/lbl_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="หมวดหมู่"
-        android:textColor="@color/text_primary"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_product_name" />
-
-    <LinearLayout
-        android:id="@+id/container_add_tags"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/lbl_category">
+        android:background="@color/white"
+        android:padding="20dp">
 
+        <!-- ส่วนหัว (Header) -->
         <TextView
-            android:id="@+id/add_tag_mama"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_tag_orange"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:text="@string/category_mama"
+            android:text="เพิ่มสินค้าใหม่"
             android:textColor="@color/text_primary"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/add_tag_drink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/bg_rounded_gray"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:text="@string/category_drink"
-            android:textColor="@color/text_secondary" />
-
-        <TextView
-            android:id="@+id/add_tag_snack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/bg_rounded_gray"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:text="@string/category_snack"
-            android:textColor="@color/text_secondary" />
-
-        <TextView
-            android:id="@+id/add_tag_milk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/bg_rounded_gray"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:text="@string/category_milk"
-            android:textColor="@color/text_secondary" />
-
-        <TextView
-            android:id="@+id/add_tag_frozen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/bg_rounded_gray"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:text="@string/category_frozen"
-            android:textColor="@color/text_secondary" />
-    </LinearLayout>
-
-    <!-- ช่องกรอก: ราคาขาย -->
-    <TextView
-        android:id="@+id/lbl_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="ราคาขาย (฿)"
-        android:textColor="@color/text_primary"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container_add_tags" />
-
-    <EditText
-        android:id="@+id/et_price"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/bg_rounded_gray"
-        android:hint="0.00"
-        android:inputType="numberDecimal"
-        android:paddingHorizontal="16dp"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/lbl_price" />
-
-    <!-- ช่องกรอก: สต็อกเริ่มต้น -->
-    <TextView
-        android:id="@+id/lbl_stock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="สต็อกเริ่มต้น (ชิ้น)"
-        android:textColor="@color/text_primary"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_price" />
-
-    <EditText
-        android:id="@+id/et_stock"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/bg_rounded_gray"
-        android:hint="เช่น 50"
-        android:inputType="number"
-        android:paddingHorizontal="16dp"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/lbl_stock" />
-
-    <!-- ปุ่มการทำงาน (Action Buttons) -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/et_stock">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_cancel"
-            style="@style/Widget.Material3.Button.TonalButton"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="ยกเลิก"
-            android:textColor="@color/text_secondary"
-            app:cornerRadius="16dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_save_product"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/brand_orange"
-            android:text="เพิ่มสินค้า"
+            android:textSize="22sp"
             android:textStyle="bold"
-            app:cornerRadius="16dp" />
-    </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/header_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#F1F3F5"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <!-- ช่องกรอก: ชื่อสินค้า -->
+        <TextView
+            android:id="@+id/lbl_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="ชื่อสินค้า"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_divider" />
+
+        <EditText
+            android:id="@+id/et_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_rounded_gray"
+            android:hint="เช่น ข้าวสาร, น้ำดื่ม..."
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/lbl_name" />
+
+        <!-- ช่องเลือก: หมวดหมู่สินค้า -->
+        <TextView
+            android:id="@+id/lbl_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="หมวดหมู่"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_product_name" />
+
+        <LinearLayout
+            android:id="@+id/container_add_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/lbl_category">
+
+            <TextView
+                android:id="@+id/add_tag_mama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_tag_orange"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="@string/category_mama"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/add_tag_drink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_rounded_gray"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="@string/category_drink"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/add_tag_snack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_rounded_gray"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="@string/category_snack"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/add_tag_milk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_rounded_gray"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="@string/category_milk"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/add_tag_frozen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_rounded_gray"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="@string/category_frozen"
+                android:textColor="@color/text_secondary" />
+        </LinearLayout>
+
+        <!-- ช่องกรอก: ราคาขาย -->
+        <TextView
+            android:id="@+id/lbl_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="ราคาขาย (฿)"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_add_tags" />
+
+        <EditText
+            android:id="@+id/et_price"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_rounded_gray"
+            android:hint="0.00"
+            android:inputType="numberDecimal"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/lbl_price" />
+
+        <!-- ช่องกรอก: สต็อกเริ่มต้น -->
+        <TextView
+            android:id="@+id/lbl_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="สต็อกเริ่มต้น (ชิ้น)"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_price" />
+
+        <EditText
+            android:id="@+id/et_stock"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_rounded_gray"
+            android:hint="เช่น 50"
+            android:inputType="number"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/lbl_stock" />
+
+        <!-- ปุ่มการทำงาน (Action Buttons) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/et_stock">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="ยกเลิก"
+                android:textColor="@color/text_secondary"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save_product"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/brand_orange"
+                android:text="เพิ่มสินค้า"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

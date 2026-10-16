@@ -36,6 +36,14 @@ class Report(
         refresh()
     }
 
+    fun showLowStockTab() {
+        select(Tab.LOW)
+    }
+
+    fun showOutOfStockTab() {
+        select(Tab.OUT)
+    }
+
     fun refresh() {
         val context = binding.root.context
         val products = repo.getAll()

@@ -91,6 +91,8 @@
     <string name="back_arrow">←</string>
 
     <!-- Validation Error Messages -->
+    <string name="products_empty">ไม่พบสินค้า</string>
+    <string name="stock_empty">ไม่มีสินค้าในคลัง</string>
     <string name="error_fill_all_fields">กรุณากรอกข้อมูลให้ครบถ้วน</string>
     <string name="error_invalid_price">กรุณากรอกราคาให้ถูกต้อง (มากกว่า 0)</string>
     <string name="error_invalid_stock">กรุณากรอกจำนวนสต็อกให้ถูกต้อง (0 หรือมากกว่า)</string>

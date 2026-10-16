@@ -84,10 +84,13 @@
 
         <!-- การ์ดสรุป: สินค้าใกล้หมด (พื้นหลังสีส้มอ่อน) -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_summary_low"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="@color/light_orange"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
@@ -116,10 +119,13 @@
 
         <!-- การ์ดสรุป: สินค้าหมดสต็อก (พื้นหลังสีแดงอ่อน) -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_summary_out"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
             app:cardBackgroundColor="@color/light_red"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
@@ -157,6 +163,19 @@
         android:paddingHorizontal="20dp"
         android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_summary" />
+
+    <TextView
+        android:id="@+id/tv_stock_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stock_empty"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_summary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

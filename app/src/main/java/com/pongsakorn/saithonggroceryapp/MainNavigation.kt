@@ -121,8 +121,12 @@ class MainNavigation : AppCompatActivity() {
         stockScreen = Stock(
             binding.layoutStock.root,
             productRepo,
-            onReportClick = {
-                reportScreen.refresh()
+            onReportClick = { showOutTab ->
+                if (showOutTab) {
+                    reportScreen.showOutOfStockTab()
+                } else {
+                    reportScreen.showLowStockTab()
+                }
                 showLayout(binding.layoutReport.root)
             },
             onUpdateClick = { product -> openUpdateStock(product, binding.layoutStock.root) },
