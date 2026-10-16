@@ -13,6 +13,7 @@ import java.util.Locale
  */
 class Home(
     view: View,
+    private val repo: ProductRepository,
     private val onSeeAllClick: () -> Unit,
     private val onSeeHistoryClick: () -> Unit = {},
 ) {
@@ -41,7 +42,7 @@ class Home(
     }
 
     fun updateDashboardCounters() {
-        val products = ProductData.products
+        val products = repo.getAll()
 
         binding.tvHomeTotalVal.text = products.size.toString()
         binding.tvHomeLowStockVal.text = products.count { it.isLowStock }.toString()

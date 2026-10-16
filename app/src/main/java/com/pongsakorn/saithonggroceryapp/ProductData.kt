@@ -3,9 +3,9 @@ package com.pongsakorn.saithonggroceryapp
 /**
  * ProductData: ข้อมูลสินค้าจำลองในหน่วยความจำ (In-Memory Data Store)
  */
-object ProductData {
+object ProductData : ProductRepository {
 
-    val products = mutableListOf(
+    private val products = mutableListOf(
         Product(
             id = "1",
             name = "เลย์สแน็ค",
@@ -29,12 +29,14 @@ object ProductData {
         ),
     )
 
-    fun addProduct(name: String, category: String, price: Double, stock: Int) {
+    override fun getAll(): List<Product> = products.toList()
+
+    override fun add(name: String, category: String, price: Double, stock: Int) {
         val nextId = ((products.maxOfOrNull { it.id.toIntOrNull() ?: 0 } ?: 0) + 1).toString()
         products.add(0, Product(nextId, name, category, price, stock))
     }
 
-    fun updateProduct(id: String, name: String, category: String, price: Double) {
+    override fun update(id: String, name: String, category: String, price: Double) {
         products.find { it.id == id }?.let {
             it.name = name
             it.category = category
@@ -42,15 +44,15 @@ object ProductData {
         }
     }
 
-    fun updateStock(id: String, newStock: Int) {
+    override fun updateStock(id: String, newStock: Int) {
         products.find { it.id == id }?.stock = newStock
     }
 
-    fun deleteProduct(product: Product) {
+    override fun delete(product: Product) {
         products.removeAll { it.id == product.id }
     }
 
-    fun restoreProduct(product: Product, index: Int = 0) {
+    override fun restore(product: Product, index: Int) {
         if (products.none { it.id == product.id }) {
             val safeIndex = index.coerceIn(0, products.size)
             products.add(safeIndex, product)

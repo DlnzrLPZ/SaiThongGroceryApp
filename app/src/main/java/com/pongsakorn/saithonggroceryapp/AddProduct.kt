@@ -9,7 +9,11 @@ import com.pongsakorn.saithonggroceryapp.databinding.AddProductBinding
 /**
  * คลาส AddProduct: จัดการ Logic ของหน้าเพิ่มสินค้าใหม่ พร้อมระบบตรวจสอบข้อมูล และบันทึกกิจกรรม
  */
-class AddProduct(view: View, private val onCancelClick: () -> Unit) {
+class AddProduct(
+    view: View,
+    private val repo: ProductRepository,
+    private val onCancelClick: () -> Unit,
+) {
     
     private val binding = AddProductBinding.bind(view)
     
@@ -59,7 +63,12 @@ class AddProduct(view: View, private val onCancelClick: () -> Unit) {
                 return@setOnClickListener
             }
 
-            ProductData.addProduct(name, selectedCategory, price, stock)
+            if (repo.existsByName(name)) {
+                Toast.makeText(binding.root.context, "มีสินค้านี้อยู่แล้ว", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            repo.add(name, selectedCategory, price, stock)
             ActivityData.logAction("เพิ่มสินค้าใหม่", "$name ($stock ชิ้น)", LogType.ADD)
             
             Toast.makeText(binding.root.context, "บันทึก $name เรียบร้อยแล้ว", Toast.LENGTH_SHORT).show()
