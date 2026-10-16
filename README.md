@@ -34,12 +34,12 @@ This is a **private app made for the shop owner only**. It has no multi-user log
 | 🗑️ **Delete** | Confirm before deleting, with an **Undo** button right after |
 | 📊 **Stock** | Overview of total, low-stock, and out-of-stock items |
 | 🔄 **Update stock** | Change the stock of the product you picked with **+ / −** or by typing a number, and preview the new total before confirming |
-| 📝 **History** | Every add, edit, delete and stock change is recorded with a time and its remark. Kept for 3 months, then removed automatically |
+| 🕘 **History** | Own tab in the bottom bar. Every add, edit, delete and stock change is listed by day with its remark, filterable by type. Kept for 3 months, then removed automatically |
 | 📉 **Report** | Low-stock and out-of-stock lists (open from the Stock screen), with a shortcut to update each item |
 
 **Stock levels**
 - 🟢 In stock: more than 10
-- 🟠 Low stock: 1 to 10
+- 🟠 Low stock: 1 to 10 (`Product.LOW_STOCK_THRESHOLD`)
 - 🔴 Out of stock: 0
 
 ## Screenshots
@@ -55,7 +55,7 @@ _Screenshots coming soon._
 
 - **Language:** Kotlin
 - **UI:** XML layouts with View Binding, Material Components, RecyclerView
-- **Navigation:** Bottom navigation bar (Home, Products, Stock)
+- **Navigation:** Bottom navigation bar (Home, Products, Stock, History) and Android back-button support
 - **Build:** Gradle (Kotlin DSL), Android Gradle Plugin 9.3
 - **SDK:** minSdk 28 · targetSdk 36 · compileSdk 37
 - **Storage (now):** in-memory data store
@@ -74,7 +74,8 @@ app/src/main/
 │   ├── Stock.kt              # Stock overview
 │   ├── UpdateStock.kt        # Update stock form (remark + confirm when set to 0)
 │   ├── Report.kt             # Low-stock / out-of-stock report
-│   ├── History.kt            # Full activity history (3-month retention)
+│   ├── History.kt            # History tab: grouped by day, filter by type (3-month retention)
+│   ├── HistoryAdapter.kt     # Day headers + log rows
 │   ├── Product.kt            # Product model
 │   ├── ProductData.kt        # In-memory product store
 │   ├── ProductResources.kt   # Category icons and colors

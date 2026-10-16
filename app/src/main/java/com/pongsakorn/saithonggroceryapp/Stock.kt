@@ -33,8 +33,8 @@ class Stock(
     fun updateCounters() {
         val products = ProductData.products
         val totalCount = products.size
-        val lowStockCount = products.count { ((it.stock in 1..10)) }
-        val outOfStockCount = products.count { it.stock == 0 }
+        val lowStockCount = products.count { it.isLowStock }
+        val outOfStockCount = products.count { it.isOutOfStock }
 
         binding.tvTotalVal.text = totalCount.toString()
         binding.tvLowStockVal.text = lowStockCount.toString()

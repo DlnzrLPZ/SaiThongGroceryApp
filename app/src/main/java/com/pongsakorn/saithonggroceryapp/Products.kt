@@ -23,6 +23,10 @@ class Products(
     private var lastDeletedProduct: Product? = null
     private var lastDeletedIndex: Int = 0
 
+    // หมวดหมู่ที่เลือกอยู่ (เก็บเป็นตัวแปรตรง ๆ แทนการเดาจากตัวอักษรหนาของแท็บ)
+    private val categoryAll = mainView.context.getString(R.string.category_all)
+    private var selectedCategory: String = categoryAll
+
     private val deletionModule = DeleteFunction(
         mainView = mainView,
         onDeleteConfirmed = {
@@ -94,11 +98,10 @@ class Products(
 
     private fun getFilteredList(): List<Product> {
         val query = binding.etSearch.text.toString().trim()
-        val currentCategory = tags.find { (it.typeface != null) && it.typeface.isBold }?.text?.toString() ?: "ทั้งหมด"
 
         return ProductData.products.filter { product ->
             val matchesSearch = product.name.contains(query, ignoreCase = true)
-            val matchesCategory = (currentCategory == "ทั้งหมด") || (product.category == currentCategory)
+            val matchesCategory = (selectedCategory == categoryAll) || (product.category == selectedCategory)
             matchesSearch && matchesCategory
         }
     }
@@ -108,6 +111,7 @@ class Products(
     }
 
     private fun updateTags(selectedTag: TextView) {
+        selectedCategory = selectedTag.text.toString()
         tags.forEach { tag ->
             val isSelected = tag == selectedTag
             tag.setBackgroundResource(if (isSelected) R.drawable.bg_tag_orange else R.drawable.bg_rounded_white)

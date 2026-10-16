@@ -54,6 +54,24 @@ object ActivityData {
     /** log ล่าสุดสำหรับหน้าหลัก */
     fun recentLogs(limit: Int = 5): List<ActivityLog> = allLogs().take(limit)
 
+    /** เวลาในวันนั้น เช่น 14:05 น. (ใช้ในหน้าประวัติที่จัดกลุ่มตามวันอยู่แล้ว) */
+    fun formatClock(timeMillis: Long): String =
+        SimpleDateFormat("HH:mm น.", Locale("th", "TH")).format(Date(timeMillis))
+
+    /** หัวข้อกลุ่มวัน: วันนี้ / เมื่อวาน / วันที่เต็ม */
+    fun dayKey(timeMillis: Long): String =
+        SimpleDateFormat("yyyyMMdd", Locale.US).format(Date(timeMillis))
+
+    fun dayLabel(timeMillis: Long, todayLabel: String, yesterdayLabel: String): String {
+        val now = System.currentTimeMillis()
+        val yesterday = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, -1) }.timeInMillis
+        return when (dayKey(timeMillis)) {
+            dayKey(now) -> todayLabel
+            dayKey(yesterday) -> yesterdayLabel
+            else -> SimpleDateFormat("d MMM yyyy", Locale("th", "TH")).format(Date(timeMillis))
+        }
+    }
+
     /** วันนี้แสดงเฉพาะเวลา, วันอื่นแสดงวันที่ + เวลา */
     fun formatTime(timeMillis: Long): String {
         val date = Date(timeMillis)

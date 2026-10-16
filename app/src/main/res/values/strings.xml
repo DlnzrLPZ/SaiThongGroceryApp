@@ -48,7 +48,10 @@
     <string name="summary_out_of_stock">หมดสต็อก</string>
     <string name="stock_remaining">คงเหลือ %1$d</string>
     <string name="unit_pieces">%1$d ชิ้น</string>
-    <string name="price_format">฿%1$d</string>
+    <string name="price_format">฿%1$s</string>
+    <string name="greeting_morning">สวัสดีตอนเช้า, แอดมิน 👋</string>
+    <string name="greeting_afternoon">สวัสดีตอนบ่าย, แอดมิน 👋</string>
+    <string name="greeting_evening">สวัสดีตอนเย็น, แอดมิน 👋</string>
 
     <!-- Update Stock Screen -->
     <string name="add_qty_label">เพิ่มจำนวน (ชิ้น)</string>
@@ -68,6 +71,14 @@
     <string name="history_title">ประวัติกิจกรรม</string>
     <string name="history_subtitle">เก็บประวัติย้อนหลัง 3 เดือน หลังจากนั้นจะถูกลบอัตโนมัติ</string>
     <string name="history_empty">ยังไม่มีประวัติกิจกรรม</string>
+    <string name="history_empty_filtered">ไม่มีกิจกรรมในหมวดนี้</string>
+    <string name="day_today">วันนี้</string>
+    <string name="day_yesterday">เมื่อวาน</string>
+    <string name="filter_all">ทั้งหมด</string>
+    <string name="filter_add">เพิ่ม</string>
+    <string name="filter_update">อัปเดต</string>
+    <string name="filter_delete">ลบ</string>
+    <string name="filter_alert">แจ้งเตือน</string>
     <string name="remark_format">หมายเหตุ: %1$s</string>
 
     <!-- Report -->

@@ -41,8 +41,8 @@ class StockAdapter(
             ivStockIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, tintRes))
 
             val qtyColorRes = when {
-                product.stock == 0 -> R.color.brand_red
-                product.stock <= 10 -> R.color.brand_orange
+                product.isOutOfStock -> R.color.brand_red
+                product.isLowStock -> R.color.brand_orange
                 else -> R.color.brand_green
             }
             tvStockQty.setTextColor(ContextCompat.getColor(context, qtyColorRes))
