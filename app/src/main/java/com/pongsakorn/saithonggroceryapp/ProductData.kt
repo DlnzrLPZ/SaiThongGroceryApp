@@ -34,6 +34,14 @@ object ProductData {
         products.add(0, Product(nextId, name, category, price, stock))
     }
 
+    fun updateProduct(id: String, name: String, category: String, price: Double) {
+        products.find { it.id == id }?.let {
+            it.name = name
+            it.category = category
+            it.price = price
+        }
+    }
+
     fun updateStock(id: String, newStock: Int) {
         products.find { it.id == id }?.stock = newStock
     }

@@ -4,6 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pongsakorn.saithonggroceryapp.databinding.UpdateStockBinding
 
 /**
@@ -26,6 +27,7 @@ class UpdateStock(view: View, private val onBackClick: () -> Unit) {
     fun setProduct(product: Product?) {
         currentProduct = product ?: ProductData.products.firstOrNull()
         addQty = 0
+        binding.etRemark.text?.clear()
         updateDisplay()
     }
 
@@ -57,21 +59,49 @@ class UpdateStock(view: View, private val onBackClick: () -> Unit) {
         }
 
         binding.btnUpdateStockCancel.setOnClickListener {
+            binding.etRemark.text?.clear()
             onBackClick()
         }
         
         binding.btnConfirmUpdateStock.setOnClickListener {
-            currentProduct?.let { targetProduct ->
-                val newStock = (currentQty + addQty).coerceAtLeast(0)
-                // อัปเดตที่ข้อมูลจริงตาม id เท่านั้น ห้ามแก้ targetProduct โดยตรง
-                // เพราะเป็นอ็อบเจกต์ที่ list กำลังแสดงอยู่ ทำให้ DiffUtil มองไม่เห็นการเปลี่ยนแปลง
-                ProductData.updateStock(targetProduct.id, newStock)
+            val targetProduct = currentProduct ?: return@setOnClickListener
+            val newStock = (currentQty + addQty).coerceAtLeast(0)
 
-                ActivityData.logAction("อัปเดตจำนวนสต็อก", "${targetProduct.name} เป็น $newStock ชิ้น", LogType.UPDATE)
+            // ถ้าจะทำให้สต็อกเหลือ 0 ให้ถามยืนยันก่อน
+            if (newStock == 0) {
+                showZeroStockConfirm(targetProduct) { saveStock(targetProduct, newStock) }
+            } else {
+                saveStock(targetProduct, newStock)
             }
-            Toast.makeText(binding.root.context, "อัปเดตสต็อกเรียบร้อยแล้ว", Toast.LENGTH_SHORT).show()
-            onBackClick()
         }
+    }
+
+    private fun showZeroStockConfirm(product: Product, onConfirm: () -> Unit) {
+        val context = binding.root.context
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.confirm_zero_stock_title)
+            .setMessage(context.getString(R.string.confirm_zero_stock_msg, product.name))
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.confirm) { _, _ -> onConfirm() }
+            .show()
+    }
+
+    private fun saveStock(product: Product, newStock: Int) {
+        val remark = binding.etRemark.text.toString().trim()
+
+        // อัปเดตที่ข้อมูลจริงตาม id เท่านั้น ห้ามแก้ product โดยตรง
+        // เพราะเป็นอ็อบเจกต์ที่ list กำลังแสดงอยู่ ทำให้ DiffUtil มองไม่เห็นการเปลี่ยนแปลง
+        ProductData.updateStock(product.id, newStock)
+        ActivityData.logAction(
+            title = "อัปเดตจำนวนสต็อก",
+            detail = "${product.name} เป็น $newStock ชิ้น",
+            type = LogType.UPDATE,
+            remark = remark,
+        )
+
+        Toast.makeText(binding.root.context, "อัปเดตสต็อกเรียบร้อยแล้ว", Toast.LENGTH_SHORT).show()
+        binding.etRemark.text?.clear()
+        onBackClick()
     }
 
     private fun updateQtyEditText() {

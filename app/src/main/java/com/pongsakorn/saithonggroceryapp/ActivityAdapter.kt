@@ -2,6 +2,7 @@ package com.pongsakorn.saithonggroceryapp
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -28,7 +29,14 @@ class ActivityAdapter : ListAdapter<ActivityLog, ActivityAdapter.ActivityViewHol
         with(holder.binding) {
             tvLogTitle.text = log.title
             tvLogDetail.text = log.detail
-            tvLogTime.text = log.timestamp
+            tvLogTime.text = ActivityData.formatTime(log.timeMillis)
+
+            if (log.remark.isBlank()) {
+                tvLogRemark.visibility = View.GONE
+            } else {
+                tvLogRemark.visibility = View.VISIBLE
+                tvLogRemark.text = context.getString(R.string.remark_format, log.remark)
+            }
 
             val (bgRes, tintRes, iconRes) = when (log.type) {
                 LogType.ADD -> Triple(R.color.light_green, R.color.brand_green, android.R.drawable.ic_input_add)

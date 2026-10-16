@@ -8,6 +8,7 @@ import com.pongsakorn.saithonggroceryapp.databinding.EditProductBinding
 
 /**
  * คลาส EditProduct: จัดการ Logic ของหน้าแก้ไขข้อมูลสินค้า
+ * เรียก setProduct() ก่อนแสดงหน้านี้ เพื่อใส่ข้อมูลเดิมของสินค้าที่ถูกกด
  */
 class EditProduct(view: View, private val onBackClick: () -> Unit) {
 
@@ -21,8 +22,21 @@ class EditProduct(view: View, private val onBackClick: () -> Unit) {
         binding.editTagFrozen,
     )
 
+    private var currentProductId: String? = null
+    private var selectedCategory: String = ""
+
     init {
         setupListeners()
+    }
+
+    /** ใส่ชื่อ หมวดหมู่ และราคาปัจจุบันของสินค้าลงในฟอร์ม */
+    fun setProduct(product: Product) {
+        currentProductId = product.id
+        binding.etEditProductName.setText(product.name)
+        binding.etEditPrice.setText(formatPrice(product.price))
+
+        val tag = tags.find { it.text.toString() == product.category } ?: tags.first()
+        updateTags(tag)
     }
 
     private fun setupListeners() {
@@ -33,8 +47,9 @@ class EditProduct(view: View, private val onBackClick: () -> Unit) {
         binding.btnEditCancel.setOnClickListener {
             onBackClick()
         }
-        
+
         binding.btnUpdateProduct.setOnClickListener {
+            val productId = currentProductId ?: return@setOnClickListener
             val name = binding.etEditProductName.text.toString().trim()
             val priceStr = binding.etEditPrice.text.toString().trim()
 
@@ -49,14 +64,21 @@ class EditProduct(view: View, private val onBackClick: () -> Unit) {
                 return@setOnClickListener
             }
 
-            ActivityData.logAction("แก้ไขข้อมูลสินค้า", name, LogType.UPDATE)
+            ProductData.updateProduct(productId, name, selectedCategory, price)
+            ActivityData.logAction(
+                "แก้ไขข้อมูลสินค้า",
+                "$name · $selectedCategory · ฿${formatPrice(price)}",
+                LogType.UPDATE,
+            )
 
             Toast.makeText(binding.root.context, "อัปเดต $name เรียบร้อยแล้ว", Toast.LENGTH_SHORT).show()
+            currentProductId = null
             onBackClick()
         }
     }
 
     private fun updateTags(selectedTag: TextView) {
+        selectedCategory = selectedTag.text.toString()
         tags.forEach { tag ->
             val isSelected = tag == selectedTag
             tag.setBackgroundResource(if (isSelected) R.drawable.bg_tag_orange else R.drawable.bg_rounded_gray)
@@ -64,4 +86,8 @@ class EditProduct(view: View, private val onBackClick: () -> Unit) {
             tag.setTypeface(null, if (isSelected) Typeface.BOLD else Typeface.NORMAL)
         }
     }
+
+    /** 25.0 -> "25", 25.5 -> "25.5" */
+    private fun formatPrice(price: Double): String =
+        if (price % 1.0 == 0.0) price.toInt().toString() else price.toString()
 }

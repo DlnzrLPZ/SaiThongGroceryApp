@@ -1,49 +1,67 @@
 package com.pongsakorn.saithonggroceryapp
 
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
 /**
- * ActivityData: จัดเก็บและเพิ่มบันทึกกิจกรรมล่าสุดในร้าน
+ * ActivityData: จัดเก็บบันทึกกิจกรรมในร้าน
+ * log ที่เก่ากว่า 3 เดือนจะถูกลบทิ้งอัตโนมัติ (ดู purgeExpired)
  */
 object ActivityData {
 
-    val logs = mutableListOf(
-        ActivityLog(
-            id = "1",
-            title = "เพิ่มสินค้าใหม่",
-            detail = "มาม่าจัมโบ้ (120 ชิ้น)",
-            timestamp = "เมื่อครู่นี้",
-            type = LogType.ADD,
-        ),
-        ActivityLog(
-            id = "2",
-            title = "สินค้าใกล้หมด",
-            detail = "เลย์สแน็ค คงเหลือ 8 ชิ้น",
-            timestamp = "15 นาทีที่แล้ว",
-            type = LogType.ALERT,
-        ),
-        ActivityLog(
-            id = "3",
-            title = "สินค้าหมดสต็อก",
-            detail = "น้ำดื่มสิงห์ 600ml คงเหลือ 0 ชิ้น",
-            timestamp = "1 ชั่วโมงที่แล้ว",
-            type = LogType.ALERT,
-        ),
-    )
+    private const val RETENTION_MONTHS = 3
+    private const val MINUTE = 60_000L
 
-    fun logAction(title: String, detail: String, type: LogType) {
-        val timeStr = SimpleDateFormat("HH:mm น.", Locale.getDefault()).format(Date())
+    private var nextId = 0L
+
+    val logs = mutableListOf<ActivityLog>().apply {
+        val now = System.currentTimeMillis()
+        add(ActivityLog("seed-3", "สินค้าหมดสต็อก", "น้ำดื่มสิงห์ 600ml คงเหลือ 0 ชิ้น", now - 60 * MINUTE, LogType.ALERT))
+        add(ActivityLog("seed-2", "สินค้าใกล้หมด", "เลย์สแน็ค คงเหลือ 8 ชิ้น", now - 15 * MINUTE, LogType.ALERT))
+        add(ActivityLog("seed-1", "เพิ่มสินค้าใหม่", "มาม่าจัมโบ้ (120 ชิ้น)", now - 1 * MINUTE, LogType.ADD))
+        sortByDescending { it.timeMillis }
+    }
+
+    fun logAction(title: String, detail: String, type: LogType, remark: String = "") {
         logs.add(
             0,
             ActivityLog(
-                id = System.currentTimeMillis().toString(),
+                id = "${System.currentTimeMillis()}-${nextId++}",
                 title = title,
                 detail = detail,
-                timestamp = timeStr,
+                timeMillis = System.currentTimeMillis(),
                 type = type,
+                remark = remark.trim(),
             ),
         )
+        purgeExpired()
+    }
+
+    /** ลบ log ที่เก่ากว่า 3 เดือนออกจากรายการ */
+    fun purgeExpired() {
+        val cutoff = Calendar.getInstance().apply { add(Calendar.MONTH, -RETENTION_MONTHS) }.timeInMillis
+        logs.removeAll { it.timeMillis < cutoff }
+    }
+
+    /** log ทั้งหมดที่ยังไม่หมดอายุ (ใหม่สุดก่อน) */
+    fun allLogs(): List<ActivityLog> {
+        purgeExpired()
+        return logs.toList()
+    }
+
+    /** log ล่าสุดสำหรับหน้าหลัก */
+    fun recentLogs(limit: Int = 5): List<ActivityLog> = allLogs().take(limit)
+
+    /** วันนี้แสดงเฉพาะเวลา, วันอื่นแสดงวันที่ + เวลา */
+    fun formatTime(timeMillis: Long): String {
+        val date = Date(timeMillis)
+        val today = Calendar.getInstance()
+        val then = Calendar.getInstance().apply { time = date }
+        val sameDay = today.get(Calendar.YEAR) == then.get(Calendar.YEAR) &&
+            today.get(Calendar.DAY_OF_YEAR) == then.get(Calendar.DAY_OF_YEAR)
+        val pattern = if (sameDay) "HH:mm น." else "d MMM yyyy HH:mm น."
+        return SimpleDateFormat(pattern, Locale("th", "TH")).format(date)
     }
 }

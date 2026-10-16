@@ -34,7 +34,8 @@ This is a **private app made for the shop owner only**. It has no multi-user log
 | 🗑️ **Delete** | Confirm before deleting, with an **Undo** button right after |
 | 📊 **Stock** | Overview of total, low-stock, and out-of-stock items |
 | 🔄 **Update stock** | Change the stock of the product you picked with **+ / −** or by typing a number, and preview the new total before confirming |
-| 📝 **Activity log** | Every add, edit, delete and stock change is recorded with a time |
+| 📝 **History** | Every add, edit, delete and stock change is recorded with a time and its remark. Kept for 3 months, then removed automatically |
+| 📉 **Report** | Low-stock and out-of-stock lists (open from the Stock screen), with a shortcut to update each item |
 
 **Stock levels**
 - 🟢 In stock: more than 10
@@ -71,7 +72,9 @@ app/src/main/
 │   ├── EditProduct.kt        # Edit product form
 │   ├── DeleteFunction.kt     # Delete dialog + undo
 │   ├── Stock.kt              # Stock overview
-│   ├── UpdateStock.kt        # Update stock form
+│   ├── UpdateStock.kt        # Update stock form (remark + confirm when set to 0)
+│   ├── Report.kt             # Low-stock / out-of-stock report
+│   ├── History.kt            # Full activity history (3-month retention)
 │   ├── Product.kt            # Product model
 │   ├── ProductData.kt        # In-memory product store
 │   ├── ProductResources.kt   # Category icons and colors
@@ -93,7 +96,9 @@ app/src/main/
 - [ ] Save data permanently
 - [ ] Backend: **Ktor + PostgreSQL** running in **Docker**
 - [ ] Connect the app to the backend
-- [ ] Sales and low-stock reports
+- [x] Low-stock and out-of-stock reports
+- [x] History page with 3-month retention
+- [ ] Sales reports
 
 ## Author
 

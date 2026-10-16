@@ -213,6 +213,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_rounded_gray"
         android:hint="เช่น รับของเข้าใหม่"
+        android:inputType="text"
         android:paddingHorizontal="16dp"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/lbl_remark" />
