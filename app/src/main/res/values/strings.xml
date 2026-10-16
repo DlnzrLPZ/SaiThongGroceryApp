@@ -26,6 +26,8 @@
     <string name="btn_add">+ เพิ่ม</string>
     <string name="btn_edit">แก้ไข</string>
     <string name="btn_delete">ลบสินค้า</string>
+    <string name="btn_save_product_text">เพิ่มสินค้า</string>
+    <string name="btn_update_product_text">อัปเดตสินค้า</string>
     <string name="save">บันทึก</string>
     <string name="cancel">ยกเลิก</string>
     <string name="update">อัปเดต</string>

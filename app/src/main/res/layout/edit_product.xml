@@ -22,7 +22,7 @@
             android:id="@+id/tv_edit_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="แก้ไขสินค้า"
+            android:text="@string/edit_product_title"
             android:textColor="@color/text_primary"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="ชื่อสินค้า"
+            android:text="@string/product_name_label"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,8 +54,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
+            android:autofillHints="name"
             android:background="@drawable/bg_rounded_gray"
-            android:hint="ชื่อสินค้า"
+            android:hint="@string/product_name_label"
             android:inputType="text"
             android:paddingHorizontal="16dp"
             android:textSize="14sp"
@@ -68,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="หมวดหมู่"
+            android:text="@string/category_heading"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +96,7 @@
                     android:background="@drawable/bg_tag_orange"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
+                    android:singleLine="true"
                     android:text="@string/category_snack"
                     android:textColor="@color/text_primary"
                     android:textStyle="bold" />
@@ -107,6 +109,7 @@
                     android:background="@drawable/bg_rounded_gray"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
+                    android:singleLine="true"
                     android:text="@string/category_drink"
                     android:textColor="@color/text_secondary" />
 
@@ -119,6 +122,7 @@
                     android:background="@drawable/bg_rounded_gray"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
+                    android:singleLine="true"
                     android:text="@string/category_mama"
                     android:textColor="@color/text_secondary" />
 
@@ -130,6 +134,7 @@
                     android:background="@drawable/bg_rounded_gray"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
+                    android:singleLine="true"
                     android:text="@string/category_milk"
                     android:textColor="@color/text_secondary" />
 
@@ -141,6 +146,7 @@
                     android:background="@drawable/bg_rounded_gray"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
+                    android:singleLine="true"
                     android:text="@string/category_frozen"
                     android:textColor="@color/text_secondary" />
             </LinearLayout>
@@ -152,7 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="ราคาขาย (฿)"
+            android:text="@string/price_label"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +170,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_rounded_gray"
-            android:hint="0.00"
+            android:hint="@string/price_hint"
             android:inputType="numberDecimal"
             android:paddingHorizontal="16dp"
             android:textSize="14sp"
@@ -186,7 +192,7 @@
                 android:layout_height="56dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:text="ยกเลิก"
+                android:text="@string/cancel"
                 android:textColor="@color/text_secondary"
                 app:cornerRadius="16dp" />
 
@@ -197,7 +203,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/brand_orange"
-                android:text="อัปเดตสินค้า"
+                android:text="@string/btn_update_product_text"
                 android:textStyle="bold"
                 app:cornerRadius="16dp" />
         </LinearLayout>

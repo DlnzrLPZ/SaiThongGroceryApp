@@ -5,7 +5,6 @@
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -22,7 +21,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="เพิ่มสินค้าใหม่"
+            android:text="@string/add_product_title"
             android:textColor="@color/text_primary"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -43,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="ชื่อสินค้า"
+            android:text="@string/product_name_label"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,8 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
+            android:autofillHints="name"
             android:background="@drawable/bg_rounded_gray"
-            android:hint="เช่น ข้าวสาร, น้ำดื่ม..."
+            android:hint="@string/product_name_hint"
             android:inputType="text"
             android:paddingHorizontal="16dp"
             android:textSize="14sp"
@@ -67,75 +67,87 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="หมวดหมู่"
+            android:text="@string/category_heading"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_product_name" />
 
-        <LinearLayout
-            android:id="@+id/container_add_tags"
+        <HorizontalScrollView
+            android:id="@+id/hsv_add_tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal"
+            android:scrollbars="none"
             app:layout_constraintTop_toBottomOf="@id/lbl_category">
 
-            <TextView
-                android:id="@+id/add_tag_mama"
+            <LinearLayout
+                android:id="@+id/container_add_tags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_tag_orange"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="@string/category_mama"
-                android:textColor="@color/text_primary"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/add_tag_drink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_rounded_gray"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="@string/category_drink"
-                android:textColor="@color/text_secondary" />
+                <TextView
+                    android:id="@+id/add_tag_mama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_tag_orange"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_mama"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/add_tag_snack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_rounded_gray"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="@string/category_snack"
-                android:textColor="@color/text_secondary" />
+                <TextView
+                    android:id="@+id/add_tag_drink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_rounded_gray"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_drink"
+                    android:textColor="@color/text_secondary" />
 
-            <TextView
-                android:id="@+id/add_tag_milk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_rounded_gray"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="@string/category_milk"
-                android:textColor="@color/text_secondary" />
+                <TextView
+                    android:id="@+id/add_tag_snack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_rounded_gray"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_snack"
+                    android:textColor="@color/text_secondary" />
 
-            <TextView
-                android:id="@+id/add_tag_frozen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_rounded_gray"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="@string/category_frozen"
-                android:textColor="@color/text_secondary" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/add_tag_milk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_rounded_gray"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_milk"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/add_tag_frozen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_rounded_gray"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_frozen"
+                    android:textColor="@color/text_secondary" />
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <!-- ช่องกรอก: ราคาขาย -->
         <TextView
@@ -143,11 +155,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="ราคาขาย (฿)"
+            android:text="@string/price_label"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/container_add_tags" />
+            app:layout_constraintTop_toBottomOf="@id/hsv_add_tags" />
 
         <EditText
             android:id="@+id/et_price"
@@ -155,7 +167,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_rounded_gray"
-            android:hint="0.00"
+            android:hint="@string/price_hint"
             android:inputType="numberDecimal"
             android:paddingHorizontal="16dp"
             android:textSize="14sp"
@@ -167,7 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="สต็อกเริ่มต้น (ชิ้น)"
+            android:text="@string/initial_stock_label"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +191,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_rounded_gray"
-            android:hint="เช่น 50"
+            android:hint="@string/initial_stock_hint"
             android:inputType="number"
             android:paddingHorizontal="16dp"
             android:textSize="14sp"
@@ -200,7 +212,7 @@
                 android:layout_height="56dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:text="ยกเลิก"
+                android:text="@string/cancel"
                 android:textColor="@color/text_secondary"
                 app:cornerRadius="16dp" />
 
@@ -211,7 +223,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/brand_orange"
-                android:text="เพิ่มสินค้า"
+                android:text="@string/btn_save_product_text"
                 android:textStyle="bold"
                 app:cornerRadius="16dp" />
         </LinearLayout>
