@@ -30,6 +30,7 @@ class Home(
 
     private val binding = HomeBinding.bind(view)
     private val activityAdapter = ActivityAdapter()
+    private val thaiDateFormat = SimpleDateFormat("EEEEที่ d MMM", Locale.forLanguageTag("th-TH"))
 
     init {
         setupRecyclerView()
@@ -39,6 +40,7 @@ class Home(
     }
 
     private fun setupRecyclerView() {
+        binding.rvRecentActivities.setHasFixedSize(true)
         binding.rvRecentActivities.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvRecentActivities.adapter = activityAdapter
     }
@@ -108,7 +110,7 @@ class Home(
         )
         val cal = Calendar.getInstance()
         val yearBE = cal.get(Calendar.YEAR) + 543
-        val dayMonth = SimpleDateFormat("EEEEที่ d MMM", Locale.forLanguageTag("th-TH")).format(cal.time)
+        val dayMonth = thaiDateFormat.format(cal.time)
         binding.tvHomeDate.text = "$dayMonth - $yearBE"
     }
 }

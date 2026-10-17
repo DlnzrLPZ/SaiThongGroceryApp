@@ -28,6 +28,7 @@ class Report(
     private var currentTab = Tab.LOW
 
     init {
+        binding.rvReport.setHasFixedSize(true)
         binding.rvReport.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvReport.adapter = adapter
         binding.btnReportBack.setOnClickListener { onBackClick() }

@@ -53,6 +53,8 @@ class BarChartView @JvmOverloads constructor(
     }
     private val barRect = RectF()
     private val minBarHeight = dp(2f)
+    private val maxBarWidth = dp(28f)
+    private val maxRadius = dp(6f)
 
     fun setData(values: List<Float>, labels: List<String>, highlightIndex: Int) {
         this.values = values
@@ -74,8 +76,8 @@ class BarChartView @JvmOverloads constructor(
 
         val maxValue = max(values.maxOrNull() ?: 0f, 1f)
         val slot = contentWidth / values.size
-        val barWidth = min(slot * 0.62f, dp(28f))
-        val radius = min(barWidth / 2f, dp(6f))
+        val barWidth = min(slot * 0.62f, maxBarWidth)
+        val radius = min(barWidth / 2f, maxRadius)
 
         labelPaint.color = labelColor
         values.forEachIndexed { index, value ->

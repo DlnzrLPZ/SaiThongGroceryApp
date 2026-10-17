@@ -30,6 +30,7 @@ class Stock(
 
     private fun setupRecyclerView() {
         adapter = StockAdapter(onUpdateClick = onUpdateClick, onSellClick = onSellClick)
+        binding.rvStock.setHasFixedSize(true)
         binding.rvStock.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvStock.adapter = adapter
     }

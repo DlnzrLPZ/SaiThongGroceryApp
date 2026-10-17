@@ -82,6 +82,7 @@ class Products(
                 )
             },
         )
+        binding.rvProducts.setHasFixedSize(true)
         binding.rvProducts.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvProducts.adapter = adapter
         refreshProductList()

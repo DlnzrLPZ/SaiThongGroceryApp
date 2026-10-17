@@ -31,6 +31,7 @@ class History(view: View) {
     )
 
     init {
+        binding.rvHistory.setHasFixedSize(true)
         binding.rvHistory.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvHistory.adapter = adapter
         filters.forEach { (chip, type) ->
