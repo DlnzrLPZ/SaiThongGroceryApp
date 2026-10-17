@@ -18,7 +18,8 @@ enum class LogType {
     ADD,
     UPDATE,
     DELETE,
-    ALERT
+    ALERT,
+    SALE
 }
 
 /** สี (พื้นหลัง, ไอคอน) และไอคอนของ log แต่ละประเภท ใช้ร่วมกันทั้งหน้าหลักและหน้าประวัติ */
@@ -29,4 +30,5 @@ fun LogType.style(): LogStyle = when (this) {
     LogType.UPDATE -> LogStyle(R.color.light_blue, R.color.brand_blue, android.R.drawable.ic_menu_edit)
     LogType.DELETE -> LogStyle(R.color.light_red, R.color.brand_red, android.R.drawable.ic_menu_delete)
     LogType.ALERT -> LogStyle(R.color.light_orange, R.color.brand_orange, android.R.drawable.ic_dialog_alert)
+    LogType.SALE -> LogStyle(R.color.light_purple, R.color.brand_purple, android.R.drawable.ic_menu_agenda)
 }

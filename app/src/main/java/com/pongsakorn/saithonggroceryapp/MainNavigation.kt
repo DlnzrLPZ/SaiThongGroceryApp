@@ -18,17 +18,23 @@ class MainNavigation : AppCompatActivity() {
     /** เปลี่ยนเป็น RemoteProductRepository ที่นี่ที่เดียว เมื่อ backend พร้อม */
     private val productRepo: ProductRepository = ProductData
 
+    /** เปลี่ยนเป็น RemoteSaleRepository ที่นี่ที่เดียว เมื่อ backend พร้อม */
+    private val saleRepo: SaleRepository = SaleData
+
     private lateinit var binding: MainContainerBinding
     private lateinit var layouts: List<View>
 
     private lateinit var homeScreen: Home
     private lateinit var stockScreen: Stock
     private lateinit var productsScreen: Products
-    private lateinit var historyScreen: History
+    private lateinit var reportHubScreen: ReportHub
     private lateinit var reportScreen: Report
 
     /** หน้าที่ต้องกลับไปหลังอัปเดตสต็อกเสร็จ (หน้าสต็อก หรือหน้ารายงาน) */
     private var updateStockReturnView: View? = null
+
+    /** หน้าที่ต้องกลับไปหลังขายสินค้าเสร็จ (หน้าสต็อก หรือหน้ารายงานสต็อก) */
+    private var sellReturnView: View? = null
 
     /** หน้าที่แสดงอยู่ตอนนี้ (ใช้กับปุ่มย้อนกลับ) */
     private var currentView: View? = null
@@ -53,7 +59,8 @@ class MainNavigation : AppCompatActivity() {
             binding.layoutAddProduct.root,
             binding.layoutEditProduct.root,
             binding.layoutUpdateStock.root,
-            binding.layoutHistory.root,
+            binding.layoutSellProduct.root,
+            binding.layoutReportHub.root,
             binding.layoutReport.root,
         )
 
@@ -65,7 +72,7 @@ class MainNavigation : AppCompatActivity() {
     }
 
     /**
-     * ปุ่มย้อนกลับของ Android: ออกจากหน้าย่อย (เพิ่ม/แก้ไข/อัปเดตสต็อก/รายงาน) กลับไปหน้าก่อนหน้า
+     * ปุ่มย้อนกลับของ Android: ออกจากหน้าย่อย (เพิ่ม/แก้ไข/อัปเดตสต็อก/ขาย/รายงานสต็อก) กลับไปหน้าก่อนหน้า
      * จากแท็บอื่นกลับหน้าหลัก และจากหน้าหลักค่อยออกจากแอป
      */
     private fun setupBackNavigation() {
@@ -75,6 +82,7 @@ class MainNavigation : AppCompatActivity() {
                     binding.layoutAddProduct.root,
                     binding.layoutEditProduct.root -> showLayout(binding.layoutProducts.root)
                     binding.layoutUpdateStock.root -> showLayout(updateStockReturnView ?: binding.layoutStock.root)
+                    binding.layoutSellProduct.root -> showLayout(sellReturnView ?: binding.layoutStock.root)
                     binding.layoutReport.root -> showLayout(binding.layoutStock.root)
                     binding.layoutHome.root -> finish()
                     else -> binding.bottomNavigation.selectedItemId = R.id.navigation_home
@@ -84,16 +92,19 @@ class MainNavigation : AppCompatActivity() {
     }
 
     private fun setupScreens() {
-        historyScreen = History(binding.layoutHistory.root)
+        reportHubScreen = ReportHub(binding.layoutReportHub.root, saleRepo)
 
         homeScreen = Home(
             binding.layoutHome.root,
             productRepo,
-            onSeeAllClick = {
-                binding.bottomNavigation.selectedItemId = R.id.navigation_products
+            saleRepo,
+            onSeeSalesClick = {
+                reportHubScreen.showSalesTab()
+                binding.bottomNavigation.selectedItemId = R.id.navigation_report
             },
             onSeeHistoryClick = {
-                binding.bottomNavigation.selectedItemId = R.id.navigation_history
+                reportHubScreen.showHistoryTab()
+                binding.bottomNavigation.selectedItemId = R.id.navigation_report
             },
         )
 
@@ -108,6 +119,17 @@ class MainNavigation : AppCompatActivity() {
             showLayout(binding.layoutUpdateStock.root)
         }
 
+        val sellScreen = SellProduct(binding.layoutSellProduct.root, productRepo, saleRepo) {
+            refreshAll()
+            showLayout(sellReturnView ?: binding.layoutStock.root)
+        }
+
+        val openSell = { product: Product, returnTo: View ->
+            sellReturnView = returnTo
+            sellScreen.setProduct(product)
+            showLayout(binding.layoutSellProduct.root)
+        }
+
         reportScreen = Report(
             binding.layoutReport.root,
             productRepo,
@@ -116,6 +138,7 @@ class MainNavigation : AppCompatActivity() {
                 showLayout(binding.layoutStock.root)
             },
             onUpdateClick = { product -> openUpdateStock(product, binding.layoutReport.root) },
+            onSellClick = { product -> openSell(product, binding.layoutReport.root) },
         )
 
         stockScreen = Stock(
@@ -130,6 +153,7 @@ class MainNavigation : AppCompatActivity() {
                 showLayout(binding.layoutReport.root)
             },
             onUpdateClick = { product -> openUpdateStock(product, binding.layoutStock.root) },
+            onSellClick = { product -> openSell(product, binding.layoutStock.root) },
         )
 
         val editProductScreen = EditProduct(binding.layoutEditProduct.root, productRepo) {
@@ -162,7 +186,7 @@ class MainNavigation : AppCompatActivity() {
         stockScreen.updateCounters()
         reportScreen.refresh()
         homeScreen.updateDashboardCounters()
-        historyScreen.refresh()
+        reportHubScreen.refresh()
     }
 
     private fun setupBottomNavigation() {
@@ -183,9 +207,9 @@ class MainNavigation : AppCompatActivity() {
                     showLayout(binding.layoutStock.root)
                     true
                 }
-                R.id.navigation_history -> {
-                    historyScreen.refresh()
-                    showLayout(binding.layoutHistory.root)
+                R.id.navigation_report -> {
+                    reportHubScreen.refresh()
+                    showLayout(binding.layoutReportHub.root)
                     true
                 }
                 else -> false

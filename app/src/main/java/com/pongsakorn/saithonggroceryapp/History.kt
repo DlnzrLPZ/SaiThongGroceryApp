@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pongsakorn.saithonggroceryapp.databinding.HistoryBinding
 
 /**
- * History: หน้าประวัติกิจกรรม (เก็บย้อนหลัง 3 เดือน)
+ * History: ประวัติกิจกรรม (แท็บย่อยในหน้ารายงาน เก็บย้อนหลัง 3 เดือน)
  * - จัดกลุ่มตามวัน (วันนี้ / เมื่อวาน / วันที่)
  * - กรองตามประเภทได้ (null = ทั้งหมด)
  * ทุกครั้งที่ refresh จะลบ log ที่เก่ากว่า 3 เดือนก่อนแสดงผล
@@ -20,6 +20,7 @@ class History(view: View) {
 
     private val filters: List<Pair<TextView, LogType?>> = listOf(
         binding.filterHistoryAll to null,
+        binding.filterHistorySale to LogType.SALE,
         binding.filterHistoryAdd to LogType.ADD,
         binding.filterHistoryUpdate to LogType.UPDATE,
         binding.filterHistoryDelete to LogType.DELETE,

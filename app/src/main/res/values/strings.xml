@@ -47,6 +47,7 @@
     <string name="summary_out_of_stock">หมดสต็อก</string>
     <string name="stock_remaining">คงเหลือ %1$d</string>
     <string name="unit_pieces">%1$d ชิ้น</string>
+    <string name="unit_piece_word">ชิ้น</string>
     <string name="price_format">฿%1$s</string>
     <string name="greeting_morning">สวัสดีตอนเช้า, แอดมิน 👋</string>
     <string name="greeting_afternoon">สวัสดีตอนบ่าย, แอดมิน 👋</string>
@@ -62,8 +63,6 @@
     <string name="confirm_zero_stock_msg">การอัปเดตนี้จะทำให้ \"%1$s\" หมดสต็อก (0 ชิ้น) ต้องการดำเนินการต่อหรือไม่?</string>
 
     <!-- History -->
-    <string name="history_title">ประวัติกิจกรรม</string>
-    <string name="history_subtitle">เก็บประวัติย้อนหลัง 3 เดือน หลังจากนั้นจะถูกลบอัตโนมัติ</string>
     <string name="history_empty">ยังไม่มีประวัติกิจกรรม</string>
     <string name="history_empty_filtered">ไม่มีกิจกรรมในหมวดนี้</string>
     <string name="day_today">วันนี้</string>
@@ -83,6 +82,52 @@
     <string name="report_empty_low">ไม่มีสินค้าใกล้หมด</string>
     <string name="report_empty_out">ไม่มีสินค้าหมดสต็อก</string>
     <string name="back_arrow">←</string>
+
+    <!-- Home: sales -->
+    <string name="home_sales_title">ยอดขายวันนี้</string>
+    <string name="home_sales_see_report">ดูรายงาน →</string>
+    <string name="home_sales_none">ยังไม่มียอดขาย</string>
+    <string name="home_sales_sub">%1$d ชิ้น · %2$s</string>
+    <string name="home_sales_higher">สูงกว่าเมื่อวาน ฿%1$s</string>
+    <string name="home_sales_lower">ต่ำกว่าเมื่อวาน ฿%1$s</string>
+    <string name="home_sales_same">เท่ากับเมื่อวาน</string>
+    <string name="home_sales_chart_description">ยอดขาย 7 วันล่าสุด</string>
+    <string name="home_stock_status">สถานะสต็อก</string>
+
+    <!-- Sell screen -->
+    <string name="btn_sell">ขาย</string>
+    <string name="sell_title">ขายสินค้า</string>
+    <string name="sell_unit_price_label">ราคาต่อชิ้น</string>
+    <string name="sell_qty_label">จำนวน (ชิ้น)</string>
+    <string name="sell_qty_hint">พิมพ์ตัวเลขได้เลย หรือกดปุ่ม − / +</string>
+    <string name="sell_decrease">ลดจำนวน</string>
+    <string name="sell_increase">เพิ่มจำนวน</string>
+    <string name="sell_total_label">รวม</string>
+    <string name="sell_stock_after">สต็อกจะเหลือ %1$d ชิ้น</string>
+    <string name="sell_confirm">ยืนยันการขาย</string>
+    <string name="sell_success">บันทึกการขาย %1$s เรียบร้อยแล้ว</string>
+    <string name="sell_error_qty">กรุณากรอกจำนวนอย่างน้อย 1 ชิ้น</string>
+    <string name="sell_error_over_stock">สต็อกมีเพียง %1$d ชิ้น</string>
+    <string name="sell_error_out_of_stock">สินค้าหมดสต็อก ขายไม่ได้</string>
+
+    <!-- Report tab: sales + history -->
+    <string name="report_hub_title">รายงาน</string>
+    <string name="report_hub_subtitle">ยอดขายและประวัติเก็บย้อนหลัง 3 เดือน หลังจากนั้นจะถูกลบอัตโนมัติ</string>
+    <string name="tab_sales">ยอดขาย</string>
+    <string name="tab_history">ประวัติ</string>
+    <string name="period_week">สัปดาห์</string>
+    <string name="period_month">เดือน</string>
+    <string name="period_three_months">3 เดือน</string>
+    <string name="sales_total_label">ยอดขายรวม</string>
+    <string name="sales_pieces_label">ขายได้</string>
+    <string name="sales_chart_hourly">ยอดขายรายชั่วโมง</string>
+    <string name="sales_chart_daily">ยอดขายรายวัน</string>
+    <string name="sales_chart_weekly">ยอดขายรายสัปดาห์</string>
+    <string name="sales_chart_description">กราฟแท่งยอดขาย</string>
+    <string name="sales_top_title">สินค้าขายดี</string>
+    <string name="top_seller_detail">%1$d ชิ้น · ฿%2$s</string>
+    <string name="sales_empty">ยังไม่มียอดขายในช่วงนี้</string>
+    <string name="filter_sale">ขาย</string>
 
     <!-- Validation Error Messages -->
     <string name="products_empty">ไม่พบสินค้า</string>

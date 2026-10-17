@@ -23,10 +23,10 @@
         android:icon="@android:drawable/ic_menu_manage"
         android:title="สต็อก" />
 
-    <!-- เมนูประวัติกิจกรรม -->
+    <!-- เมนูรายงาน (ยอดขาย + ประวัติกิจกรรม) -->
     <item
-        android:id="@+id/navigation_history"
-        android:icon="@android:drawable/ic_menu_recent_history"
-        android:title="ประวัติ" />
+        android:id="@+id/navigation_report"
+        android:icon="@drawable/ic_nav_report"
+        android:title="@string/report_hub_title" />
 
 </menu>

@@ -14,12 +14,13 @@ class Report(
     private val repo: ProductRepository,
     private val onBackClick: () -> Unit,
     private val onUpdateClick: (Product) -> Unit,
+    private val onSellClick: (Product) -> Unit,
 ) {
 
     private enum class Tab { LOW, OUT }
 
     private val binding = ReportBinding.bind(view)
-    private val adapter = StockAdapter { product -> onUpdateClick(product) }
+    private val adapter = StockAdapter(onUpdateClick = onUpdateClick, onSellClick = onSellClick)
     private var currentTab = Tab.LOW
 
     init {

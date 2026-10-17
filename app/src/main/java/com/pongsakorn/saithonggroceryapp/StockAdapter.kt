@@ -14,6 +14,7 @@ import com.pongsakorn.saithonggroceryapp.databinding.ItemStockBinding
  */
 class StockAdapter(
     private val onUpdateClick: (Product) -> Unit,
+    private val onSellClick: (Product) -> Unit,
 ) : ListAdapter<Product, StockAdapter.StockViewHolder>(DiffCallback) {
 
     class StockViewHolder(val binding: ItemStockBinding) : RecyclerView.ViewHolder(binding.root)
@@ -51,6 +52,10 @@ class StockAdapter(
             pbStockLevel.progressTintList = ColorStateList.valueOf(ContextCompat.getColor(context, qtyColorRes))
 
             btnUpdateStockItem.setOnClickListener { onUpdateClick(product) }
+
+            btnSellItem.isEnabled = !product.isOutOfStock
+            btnSellItem.alpha = if (product.isOutOfStock) 0.4f else 1f
+            btnSellItem.setOnClickListener { onSellClick(product) }
         }
     }
 

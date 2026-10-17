@@ -12,6 +12,7 @@ class Stock(
     private val repo: ProductRepository,
     private val onReportClick: (showOutTab: Boolean) -> Unit = {},
     private val onUpdateClick: (Product) -> Unit,
+    private val onSellClick: (Product) -> Unit,
 ) {
 
     private val binding = StockBinding.bind(view)
@@ -26,9 +27,7 @@ class Stock(
     }
 
     private fun setupRecyclerView() {
-        adapter = StockAdapter { product ->
-            onUpdateClick(product)
-        }
+        adapter = StockAdapter(onUpdateClick = onUpdateClick, onSellClick = onSellClick)
         binding.rvStock.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvStock.adapter = adapter
     }

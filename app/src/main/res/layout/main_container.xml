@@ -74,10 +74,20 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- หน้าประวัติกิจกรรม -->
+    <!-- หน้าขายสินค้า -->
     <include
-        android:id="@+id/layout_history"
-        layout="@layout/history"
+        android:id="@+id/layout_sell_product"
+        layout="@layout/sell_product"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- แท็บรายงาน: ยอดขาย + ประวัติกิจกรรม -->
+    <include
+        android:id="@+id/layout_report_hub"
+        layout="@layout/report_hub"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"

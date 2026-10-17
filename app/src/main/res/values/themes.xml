@@ -19,6 +19,19 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <!-- Style ปุ่มเลือกช่วงเวลาในรายงานยอดขาย (4 ปุ่มแบ่งความกว้างเท่ากัน สถานะที่เลือกเปลี่ยนสีใน SalesReport.kt) -->
+    <style name="SalesPeriodChip" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:background">@drawable/bg_rounded_white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
     <!-- Style สำหรับไอคอนสินค้า เพื่อให้เรียกใช้ง่ายและเหมือนกันทั้งแอป -->
     <style name="Widget.SaiThongGroceryApp.ProductIcon" parent="">
         <item name="android:layout_width">60dp</item>

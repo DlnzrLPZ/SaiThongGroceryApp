@@ -28,14 +28,15 @@ This is a **private app made for the shop owner only**. It has no multi-user log
 
 | Screen | What you can do |
 |---|---|
-| 🏠 **Home** | Dashboard with total products, low-stock count, and recent activity |
+| 🏠 **Home** | Dashboard with today's sales (compared with yesterday, plus a 7-day mini chart), stock status (total, low, out of stock), and recent activity |
 | 📦 **Products** | Browse all products, search by name, filter by category |
 | ➕ **Add / ✏️ Edit** | Create or change a product (name, category, price, stock) with input validation |
 | 🗑️ **Delete** | Confirm before deleting, with an **Undo** button right after |
 | 📊 **Stock** | Overview of total, low-stock, and out-of-stock items |
 | 🔄 **Update stock** | Change the stock of the product you picked with **+ / −** or by typing a number, and preview the new total before confirming |
-| 🕘 **History** | Own tab in the bottom bar. Every add, edit, delete and stock change is listed by day with its remark, filterable by type. Kept for 3 months, then removed automatically |
-| 📉 **Report** | Low-stock and out-of-stock lists (open from the Stock screen), with a shortcut to update each item |
+| 💰 **Sell** | Open from the **ขาย** button on a stock item. Type the quantity directly or use **− / +**, see the total and the remaining stock, then confirm. The sale is saved, the stock is reduced, and it appears in History. Out-of-stock items cannot be sold |
+| 📈 **Report tab** | Own tab in the bottom bar with two sub-tabs. **ยอดขาย (Sales)**: total, pieces sold, bar chart and top 3 products for today, 7 days, 30 days or 3 months. **ประวัติ (History)**: every add, edit, delete, sale and stock change listed by day with its remark, filterable by type. Both are kept for 3 months, then removed automatically |
+| 📉 **Stock report** | Low-stock and out-of-stock lists (open from the Stock screen), with shortcuts to update or sell each item |
 
 **Stock levels**
 - 🟢 In stock: more than 10
@@ -55,7 +56,7 @@ _Screenshots coming soon._
 
 - **Language:** Kotlin
 - **UI:** XML layouts with View Binding, Material Components, RecyclerView
-- **Navigation:** Bottom navigation bar (Home, Products, Stock, History) and Android back-button support
+- **Navigation:** Bottom navigation bar (Home, Products, Stock, Report) and Android back-button support
 - **Build:** Gradle (Kotlin DSL), Android Gradle Plugin 9.3
 - **SDK:** minSdk 28 · targetSdk 36 · compileSdk 37
 - **Storage (now):** in-memory data store
@@ -73,14 +74,22 @@ app/src/main/
 │   ├── DeleteFunction.kt     # Delete dialog + undo
 │   ├── Stock.kt              # Stock overview
 │   ├── UpdateStock.kt        # Update stock form (remark + confirm when set to 0)
+│   ├── SellProduct.kt        # Sell screen (typed quantity or − / +)
 │   ├── Report.kt             # Low-stock / out-of-stock report
-│   ├── History.kt            # History tab: grouped by day, filter by type (3-month retention)
+│   ├── ReportHub.kt          # Report tab: Sales + History sub-tabs
+│   ├── SalesReport.kt        # Sales report (period, chart, top sellers)
+│   ├── SalesStats.kt         # Sales totals, chart buckets and top sellers
+│   ├── BarChartView.kt       # Simple bar chart (no external library)
+│   ├── History.kt            # History: grouped by day, filter by type (3-month retention)
 │   ├── HistoryAdapter.kt     # Day headers + log rows
 │   ├── Product.kt            # Product model
 │   ├── ProductData.kt        # In-memory product store
 │   ├── ProductResources.kt   # Category icons and colors
 │   ├── ActivityData.kt       # In-memory activity log
 │   ├── ActivityLog.kt        # Activity log model
+│   ├── Sale.kt               # Sale model (keeps name and price at sale time)
+│   ├── SaleRepository.kt     # Sales data interface
+│   ├── SaleData.kt           # In-memory sales store (3-month retention)
 │   └── *Adapter.kt           # RecyclerView adapters
 └── res/
     ├── layout/               # Screens and list items
@@ -99,7 +108,8 @@ app/src/main/
 - [ ] Connect the app to the backend
 - [x] Low-stock and out-of-stock reports
 - [x] History page with 3-month retention
-- [ ] Sales reports
+- [x] Sell screen and sales reports (3-month retention)
+- [x] Home dashboard with today's sales
 
 ## Author
 

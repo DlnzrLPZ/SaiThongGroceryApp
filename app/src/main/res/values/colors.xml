@@ -14,4 +14,7 @@
     <color name="brand_red">#F44336</color>
     <color name="light_blue">#E3F2FD</color>
     <color name="brand_blue">#2196F3</color>
+    <color name="chart_bar">#FFD3B0</color>
+    <color name="hero_bar">#80FFFFFF</color>
+    <color name="on_orange_soft">#E6FFFFFF</color>
 </resources>

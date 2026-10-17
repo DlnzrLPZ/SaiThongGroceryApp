@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    history.xml: หน้าประวัติกิจกรรม (แท็บในแถบเมนูล่าง)
-    ดีไซน์เรียบ: หัวข้อใหญ่ + ตัวกรองประเภท + รายการจัดกลุ่มตามวัน
-    ประวัติเก็บย้อนหลัง 3 เดือน
+    history.xml: ประวัติกิจกรรม (แท็บย่อยในหน้ารายงาน ดู report_hub.xml)
+    ตัวกรองประเภท + รายการจัดกลุ่มตามวัน ประวัติเก็บย้อนหลัง 3 เดือน
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,42 +9,15 @@
     android:layout_height="match_parent"
     android:background="@color/background_gray">
 
-    <LinearLayout
-        android:id="@+id/header_history"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="20dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/history_title"
-            android:textColor="@color/text_primary"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/history_subtitle"
-            android:textColor="@color/text_secondary"
-            android:textSize="12sp" />
-    </LinearLayout>
-
     <!-- ตัวกรองประเภทกิจกรรม -->
     <HorizontalScrollView
         android:id="@+id/hsv_history_filters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:paddingHorizontal="20dp"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/header_history">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -56,6 +28,11 @@
                 android:id="@+id/filter_history_all"
                 style="@style/HistoryFilterChip"
                 android:text="@string/filter_all" />
+
+            <TextView
+                android:id="@+id/filter_history_sale"
+                style="@style/HistoryFilterChip"
+                android:text="@string/filter_sale" />
 
             <TextView
                 android:id="@+id/filter_history_add"
