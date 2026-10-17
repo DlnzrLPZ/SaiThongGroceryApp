@@ -15,7 +15,7 @@ import com.pongsakorn.saithonggroceryapp.databinding.ItemProductBinding
  */
 class ProductAdapter(
     private val onEditClick: (Product) -> Unit,
-    private val onDeleteClick: (Product, View) -> Unit,
+    private val onDeleteClick: (Product) -> Unit,
 ) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(DiffCallback) {
 
     class ProductViewHolder(val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root)
@@ -45,7 +45,7 @@ class ProductAdapter(
             itemDivider.visibility = if (position == (itemCount - 1)) View.GONE else View.VISIBLE
 
             btnEdit.setOnClickListener { onEditClick(product) }
-            btnDelete.setOnClickListener { onDeleteClick(product, holder.itemView) }
+            btnDelete.setOnClickListener { onDeleteClick(product) }
         }
     }
 

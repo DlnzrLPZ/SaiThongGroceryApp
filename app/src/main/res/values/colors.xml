@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_gray">#F8F9FA</color>
     <color name="text_primary">#212529</color>
@@ -15,5 +14,4 @@
     <color name="brand_red">#F44336</color>
     <color name="light_blue">#E3F2FD</color>
     <color name="brand_blue">#2196F3</color>
-    <color name="tag_gray">#F1F3F5</color>
 </resources>

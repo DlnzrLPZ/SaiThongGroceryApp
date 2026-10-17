@@ -20,7 +20,6 @@
     <string name="stock_title">จัดการสต็อก</string>
     <string name="add_product_title">เพิ่มสินค้าใหม่</string>
     <string name="edit_product_title">แก้ไขสินค้า</string>
-    <string name="update_stock_title">อัปเดตสต็อก</string>
 
     <!-- Common Actions -->
     <string name="btn_add">+ เพิ่ม</string>
@@ -28,9 +27,7 @@
     <string name="btn_delete">ลบสินค้า</string>
     <string name="btn_save_product_text">เพิ่มสินค้า</string>
     <string name="btn_update_product_text">อัปเดตสินค้า</string>
-    <string name="save">บันทึก</string>
     <string name="cancel">ยกเลิก</string>
-    <string name="update">อัปเดต</string>
     <string name="confirm">ยืนยัน</string>
     <string name="undo">เลิกทำ</string>
 
@@ -56,13 +53,8 @@
     <string name="greeting_evening">สวัสดีตอนเย็น, แอดมิน 👋</string>
 
     <!-- Update Stock Screen -->
-    <string name="add_qty_label">เพิ่มจำนวน (ชิ้น)</string>
-    <string name="stock_after_update">สต็อกหลังอัปเดต</string>
-    <string name="note_label">สาเหตุ / หมายเหตุ</string>
-    <string name="note_hint">เช่น รับของเข้าใหม่</string>
 
     <!-- Delete Dialog -->
-    <string name="delete_dialog_confirm_msg">คุณยืนยันที่จะลบ</string>
     <string name="delete_success_msg">ลบ \"%1$s\" เรียบร้อยแล้ว</string>
 
     <!-- Zero stock confirm -->

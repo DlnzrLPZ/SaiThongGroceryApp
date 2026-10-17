@@ -69,7 +69,7 @@ class Products(
     private fun setupRecyclerView() {
         adapter = ProductAdapter(
             onEditClick = { product -> onEditClick(product) },
-            onDeleteClick = { product, _ ->
+            onDeleteClick = { product ->
                 lastDeletedProduct = product
                 deletionModule.showModernDeleteDialog(
                     productName = product.name,
