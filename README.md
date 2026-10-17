@@ -66,35 +66,53 @@ _Screenshots coming soon._
 ```
 app/src/main/
 ├── java/com/pongsakorn/saithonggroceryapp/
-│   ├── MainNavigation.kt     # Main screen + bottom navigation
-│   ├── Home.kt               # Dashboard
-│   ├── Products.kt           # Product list, search, category filter
-│   ├── AddProduct.kt         # Add product form
-│   ├── EditProduct.kt        # Edit product form
-│   ├── DeleteFunction.kt     # Delete dialog + undo
-│   ├── Stock.kt              # Stock overview
-│   ├── UpdateStock.kt        # Update stock form (remark + confirm when set to 0)
-│   ├── SellProduct.kt        # Sell screen (typed quantity or − / +)
-│   ├── Report.kt             # Low-stock / out-of-stock report
-│   ├── ReportHub.kt          # Report tab: Sales + History sub-tabs
-│   ├── SalesReport.kt        # Sales report (period, chart, top sellers)
-│   ├── SalesStats.kt         # Sales totals, chart buckets and top sellers
-│   ├── BarChartView.kt       # Simple bar chart (no external library)
-│   ├── History.kt            # History: grouped by day, filter by type (3-month retention)
-│   ├── HistoryAdapter.kt     # Day headers + log rows
-│   ├── Product.kt            # Product model
-│   ├── ProductData.kt        # In-memory product store
-│   ├── ProductResources.kt   # Category icons and colors
-│   ├── ActivityData.kt       # In-memory activity log
-│   ├── ActivityLog.kt        # Activity log model
-│   ├── Sale.kt               # Sale model (keeps name and price at sale time)
-│   ├── SaleRepository.kt     # Sales data interface
-│   ├── SaleData.kt           # In-memory sales store (3-month retention)
-│   └── *Adapter.kt           # RecyclerView adapters
+│   ├── MainNavigation.kt         # Main Activity + bottom navigation
+│   ├── model/                    # Data models & enums
+│   │   ├── Product.kt            # Product data class
+│   │   ├── ActivityLog.kt        # Activity log & LogType enum
+│   │   └── Sale.kt               # Sale transaction model
+│   ├── data/                     # Data repositories & stores
+│   │   ├── ProductRepository.kt  # Product repository interface
+│   │   ├── ProductData.kt        # In-memory product store
+│   │   ├── SaleRepository.kt     # Sales data interface
+│   │   ├── SaleData.kt           # In-memory sales store (3-month retention)
+│   │   ├── ActivityData.kt       # In-memory activity log
+│   │   └── SalesStats.kt         # Sales analytics helper
+│   ├── ui/                       # Screen controllers & adapters by feature
+│   │   ├── home/
+│   │   │   └── Home.kt           # Dashboard controller
+│   │   ├── products/
+│   │   │   ├── Products.kt       # Product list & search
+│   │   │   ├── AddProduct.kt     # Add product form
+│   │   │   ├── EditProduct.kt    # Edit product form
+│   │   │   ├── DeleteFunction.kt # Delete dialog + undo
+│   │   │   └── ProductAdapter.kt # Product ListAdapter
+│   │   ├── stock/
+│   │   │   ├── Stock.kt          # Stock overview
+│   │   │   ├── UpdateStock.kt    # Update stock form
+│   │   │   ├── SellProduct.kt    # Sell screen
+│   │   │   └── StockAdapter.kt   # Stock ListAdapter
+│   │   ├── history/
+│   │   │   ├── History.kt        # History screen (3-month retention)
+│   │   │   ├── HistoryAdapter.kt # History ListAdapter
+│   │   │   └── ActivityAdapter.kt# Recent activity ListAdapter
+│   │   └── report/
+│   │       ├── ReportHub.kt      # Report hub (Sales + History)
+│   │       ├── Report.kt         # Low/out-of-stock report
+│   │       └── SalesReport.kt    # Sales report (period & chart)
+│   └── util/                     # UI components & helpers
+│       ├── ProductResources.kt   # Category icons and colors
+│       └── BarChartView.kt       # Simple custom bar chart view
 └── res/
-    ├── layout/               # Screens and list items
-    ├── drawable/             # Shapes and category images
-    └── values/               # Strings (Thai), colors, themes
+    ├── layouts/                  # Organized layout subfolders by feature
+    │   ├── home/                 # Home dashboard layouts
+    │   ├── products/             # Product management layouts
+    │   ├── stock/                # Stock & sell layouts
+    │   ├── history/              # History & activity log layouts
+    │   ├── report/               # Sales & stock report layouts
+    │   └── common/               # Main container layout
+    ├── drawable/                 # Vector shapes & category images
+    └── values/                   # Strings (Thai), colors, themes
 ```
 
 ## Roadmap
