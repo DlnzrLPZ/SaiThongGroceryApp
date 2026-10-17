@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    edit_product.xml: หน้าจอแก้ไขข้อมูลสินค้าเดิม
+    แสดงข้อมูลปัจจุบันของสินค้าเพื่อให้ผู้ใช้ทำการแก้ไข
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="20dp">
+
+        <!-- ส่วนหัว (Header) -->
+        <TextView
+            android:id="@+id/tv_edit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_product_title"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/edit_header_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#F1F3F5"
+            app:layout_constraintTop_toBottomOf="@id/tv_edit_title" />
+
+        <!-- แก้ไข: ชื่อสินค้า -->
+        <TextView
+            android:id="@+id/lbl_edit_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/product_name_label"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_header_divider" />
+
+        <EditText
+            android:id="@+id/et_edit_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:autofillHints="name"
+            android:background="@drawable/bg_rounded_gray"
+            android:hint="@string/product_name_label"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            tools:text="เลย์สแน็ค"
+            app:layout_constraintTop_toBottomOf="@id/lbl_edit_name" />
+
+        <!-- แก้ไข: หมวดหมู่สินค้า -->
+        <TextView
+            android:id="@+id/lbl_edit_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/category_heading"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_edit_product_name" />
+
+        <HorizontalScrollView
+            android:id="@+id/hsv_edit_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/lbl_edit_category">
+
+            <LinearLayout
+                android:id="@+id/container_edit_tags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edit_tag_snack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_tag_orange"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_snack"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/edit_tag_drink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_rounded_gray"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_drink"
+                    android:textColor="@color/text_secondary" />
+
+                <!-- ตัวเลือกหมวดหมู่อื่นๆ... -->
+                <TextView
+                    android:id="@+id/edit_tag_mama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_rounded_gray"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_mama"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/edit_tag_milk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_rounded_gray"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_milk"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/edit_tag_frozen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_rounded_gray"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="true"
+                    android:text="@string/category_frozen"
+                    android:textColor="@color/text_secondary" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- แก้ไข: ราคาขาย -->
+        <TextView
+            android:id="@+id/lbl_edit_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/price_label"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hsv_edit_tags" />
+
+        <EditText
+            android:id="@+id/et_edit_price"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_rounded_gray"
+            android:hint="@string/price_hint"
+            android:inputType="numberDecimal"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            tools:text="25"
+            app:layout_constraintTop_toBottomOf="@id/lbl_edit_price" />
+
+        <!-- ปุ่มการทำงาน (Action Buttons) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/et_edit_price">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_edit_cancel"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                android:textColor="@color/text_secondary"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_update_product"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/brand_orange"
+                android:text="@string/btn_update_product_text"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

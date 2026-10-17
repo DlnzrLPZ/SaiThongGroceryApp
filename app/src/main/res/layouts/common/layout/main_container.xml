@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    main_container.xml: เลย์เอาต์หลักที่ทำหน้าที่เป็นโครงสร้างของแอป
+    ประกอบด้วยพื้นที่แสดงเนื้อหา (Content Views) และแถบเมนูเปลี่ยนหน้าด้านล่าง (BottomNavigationView)
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    tools:context=".MainNavigation">
+
+    <!-- ส่วนที่ 1: หน้าจอแต่ละหน้า (Content Views) ที่จะถูกซ่อน/แสดงตามสถานะการใช้งาน -->
+
+    <!-- หน้าหลัก -->
+    <include
+        android:id="@+id/layout_home"
+        layout="@layout/home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- หน้ารายการสินค้า -->
+    <include
+        android:id="@+id/layout_products"
+        layout="@layout/products"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- หน้าจัดการคลังสินค้า (สต็อก) -->
+    <include
+        android:id="@+id/layout_stock"
+        layout="@layout/stock"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- หน้าเพิ่มสินค้าใหม่ -->
+    <include
+        android:id="@+id/layout_add_product"
+        layout="@layout/add_product"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- หน้าแก้ไขข้อมูลสินค้า -->
+    <include
+        android:id="@+id/layout_edit_product"
+        layout="@layout/edit_product"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- หน้าเพิ่ม/ลดจำนวนสต็อก -->
+    <include
+        android:id="@+id/layout_update_stock"
+        layout="@layout/update_stock"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- หน้าขายสินค้า -->
+    <include
+        android:id="@+id/layout_sell_product"
+        layout="@layout/sell_product"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- แท็บรายงาน: ยอดขาย + ประวัติกิจกรรม -->
+    <include
+        android:id="@+id/layout_report_hub"
+        layout="@layout/report_hub"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- หน้ารายงานสินค้าใกล้หมด/หมดสต็อก -->
+    <include
+        android:id="@+id/layout_report"
+        layout="@layout/report"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ส่วนที่ 2: แถบเมนูนำทางด้านล่าง (Bottom Navigation) -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:elevation="8dp"
+        app:itemIconTint="@color/bottom_nav_selector"
+        app:itemTextColor="@color/bottom_nav_selector"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

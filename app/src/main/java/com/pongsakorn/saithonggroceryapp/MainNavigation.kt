@@ -7,7 +7,21 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.pongsakorn.saithonggroceryapp.data.ProductData
+import com.pongsakorn.saithonggroceryapp.data.ProductRepository
+import com.pongsakorn.saithonggroceryapp.data.SaleData
+import com.pongsakorn.saithonggroceryapp.data.SaleRepository
 import com.pongsakorn.saithonggroceryapp.databinding.MainContainerBinding
+import com.pongsakorn.saithonggroceryapp.model.Product
+import com.pongsakorn.saithonggroceryapp.ui.home.Home
+import com.pongsakorn.saithonggroceryapp.ui.products.AddProduct
+import com.pongsakorn.saithonggroceryapp.ui.products.EditProduct
+import com.pongsakorn.saithonggroceryapp.ui.products.Products
+import com.pongsakorn.saithonggroceryapp.ui.report.Report
+import com.pongsakorn.saithonggroceryapp.ui.report.ReportHub
+import com.pongsakorn.saithonggroceryapp.ui.stock.SellProduct
+import com.pongsakorn.saithonggroceryapp.ui.stock.Stock
+import com.pongsakorn.saithonggroceryapp.ui.stock.UpdateStock
 
 /**
  * MainNavigation: คลาสหลักที่ควบคุมการเปลี่ยนหน้า (Navigation) ทั้งหมดในแอปพลิเคชัน

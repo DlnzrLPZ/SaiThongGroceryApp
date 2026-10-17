@@ -1,0 +1,74 @@
+package com.pongsakorn.saithonggroceryapp.ui.stock
+
+import android.content.res.ColorStateList
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.pongsakorn.saithonggroceryapp.R
+import com.pongsakorn.saithonggroceryapp.databinding.ItemStockBinding
+import com.pongsakorn.saithonggroceryapp.model.Product
+import com.pongsakorn.saithonggroceryapp.util.ProductResources
+
+/**
+ * StockAdapter: อะแดปเตอร์ประสิทธิภาพสูงใช้ ListAdapter และ DiffUtil สำหรับหน้าจัดการสต็อก
+ */
+class StockAdapter(
+    private val onUpdateClick: (Product) -> Unit,
+    private val onSellClick: (Product) -> Unit,
+) : ListAdapter<Product, StockAdapter.StockViewHolder>(DiffCallback) {
+
+    class StockViewHolder(val binding: ItemStockBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StockViewHolder {
+        val binding = ItemStockBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return StockViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: StockViewHolder, position: Int) {
+        val product = getItem(position)
+        val context = holder.itemView.context
+
+        with(holder.binding) {
+            tvStockName.text = product.name
+            tvStockCategory.text = context.getString(R.string.category_label, product.category)
+            tvStockQty.text = context.getString(R.string.stock_remaining, product.stock)
+
+            val iconRes = ProductResources.getIconByCategory(product.category)
+            val bgRes = ProductResources.getBackgroundColorByCategory(product.category)
+            val tintRes = ProductResources.getTintByCategory(product.category)
+
+            ivStockIcon.setImageResource(iconRes)
+            ivStockIcon.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, bgRes))
+            ivStockIcon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, tintRes))
+
+            val qtyColorRes = when {
+                product.isOutOfStock -> R.color.brand_red
+                product.isLowStock -> R.color.brand_orange
+                else -> R.color.brand_green
+            }
+            tvStockQty.setTextColor(ContextCompat.getColor(context, qtyColorRes))
+
+            pbStockLevel.progress = product.stock.coerceAtMost(100)
+            pbStockLevel.progressTintList = ColorStateList.valueOf(ContextCompat.getColor(context, qtyColorRes))
+
+            btnUpdateStockItem.setOnClickListener { onUpdateClick(product) }
+
+            btnSellItem.isEnabled = !product.isOutOfStock
+            btnSellItem.alpha = if (product.isOutOfStock) 0.4f else 1f
+            btnSellItem.setOnClickListener { onSellClick(product) }
+        }
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem == newItem
+        }
+    }
+}

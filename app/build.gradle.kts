@@ -10,6 +10,20 @@ android {
         }
     }
 
+    sourceSets {
+        getByName("main") {
+            res.srcDirs(
+                "src/main/res/layouts/home",
+                "src/main/res/layouts/products",
+                "src/main/res/layouts/stock",
+                "src/main/res/layouts/history",
+                "src/main/res/layouts/report",
+                "src/main/res/layouts/common",
+                "src/main/res",
+            )
+        }
+    }
+
     defaultConfig {
         applicationId = "com.pongsakorn.saithonggroceryapp"
         minSdk = 28
