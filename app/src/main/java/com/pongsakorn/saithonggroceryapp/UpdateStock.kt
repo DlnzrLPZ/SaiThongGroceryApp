@@ -98,13 +98,14 @@ class UpdateStock(
 
     private fun saveStock(product: Product, newStock: Int) {
         val remark = binding.etRemark.text.toString().trim()
+        val stockChange = newStock - currentQty
 
         // อัปเดตที่ข้อมูลจริงตาม id เท่านั้น ห้ามแก้ product โดยตรง
         // เพราะเป็นอ็อบเจกต์ที่ list กำลังแสดงอยู่ ทำให้ DiffUtil มองไม่เห็นการเปลี่ยนแปลง
         repo.updateStock(product.id, newStock)
         ActivityData.logAction(
-            title = "อัปเดตจำนวนสต็อก",
-            detail = "${product.name} เป็น $newStock ชิ้น",
+            title = if (stockChange > 0) "รับสินค้าเข้าสต็อก" else "นำสินค้าออกจากสต็อก",
+            detail = "${product.name} ${if (stockChange > 0) "+$stockChange" else stockChange} ชิ้น · คงเหลือ $newStock ชิ้น",
             type = LogType.UPDATE,
             remark = remark,
         )
