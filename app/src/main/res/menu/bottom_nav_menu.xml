@@ -8,19 +8,19 @@
     <!-- เมนูหน้าหลัก -->
     <item
         android:id="@+id/navigation_home"
-        android:icon="@android:drawable/ic_menu_today"
+        android:icon="@drawable/ic_nav_home"
         android:title="หน้าหลัก" />
 
     <!-- เมนูจัดการสินค้า -->
     <item
         android:id="@+id/navigation_products"
-        android:icon="@android:drawable/ic_menu_gallery"
+        android:icon="@drawable/ic_nav_products"
         android:title="สินค้า" />
 
     <!-- เมนูจัดการสต็อก -->
     <item
         android:id="@+id/navigation_stock"
-        android:icon="@android:drawable/ic_menu_manage"
+        android:icon="@drawable/ic_nav_stock"
         android:title="สต็อก" />
 
     <!-- เมนูรายงาน (ยอดขาย + ประวัติกิจกรรม) -->
