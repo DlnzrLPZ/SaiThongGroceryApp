@@ -16,12 +16,12 @@ object ProductResources {
     @DrawableRes
     fun getIconByCategory(category: String): Int {
         return when (category) {
-            "มาม่า" -> R.drawable.noodle
-            "เครื่องดื่ม" -> R.drawable.water
-            "ขนม" -> R.drawable.chips
-            "นม" -> R.drawable.milk
-            "แช่แข็ง" -> R.drawable.frozenfood
-            else -> R.drawable.ic_launcher_foreground // ไอคอนเริ่มต้นถ้าไม่พบ
+            "มาม่า" -> R.drawable.ic_cat_noodle
+            "เครื่องดื่ม" -> R.drawable.ic_cat_drink
+            "ขนม" -> R.drawable.ic_cat_snack
+            "นม" -> R.drawable.ic_cat_milk
+            "แช่แข็ง" -> R.drawable.ic_cat_frozen
+            else -> R.drawable.ic_nav_stock // ไอคอนกล่องเริ่มต้นถ้าไม่พบหมวดหมู่
         }
     }
 

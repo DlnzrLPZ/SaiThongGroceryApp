@@ -31,7 +31,7 @@
                 android:layout_height="56dp"
                 android:background="#FFF3E0"
                 android:padding="12dp"
-                android:src="@drawable/chips"
+                android:src="@drawable/ic_cat_snack"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
 
             <LinearLayout
