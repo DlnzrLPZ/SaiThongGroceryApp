@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -48,8 +49,25 @@ class ProductAdapter(
 
             itemDivider.visibility = if (position == (itemCount - 1)) View.GONE else View.VISIBLE
 
-            btnEdit.setOnClickListener { onEditClick(product) }
-            btnDelete.setOnClickListener { onDeleteClick(product) }
+            btnMore.setOnClickListener { anchor ->
+                PopupMenu(anchor.context, anchor).apply {
+                    menuInflater.inflate(R.menu.product_item_menu, menu)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.action_edit_product -> {
+                                onEditClick(product)
+                                true
+                            }
+                            R.id.action_delete_product -> {
+                                onDeleteClick(product)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                    show()
+                }
+            }
         }
     }
 
